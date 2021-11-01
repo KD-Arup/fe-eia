@@ -1,0 +1,29 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* grid-template-columns: auto auto auto auto; */
+    
+    background-color: #ffffff;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 6vh;
+    min-height: 30px;
+    
+    padding-top: 10px;
+    
+    justify-content: center;
+
+    border: solid 2px black;
+    
+}
+
+.navbar_title{
+    color: #e61e28;
+    text-decoration: none;
+}
+
+.navbar_link{
+    text-align: end;
+}
