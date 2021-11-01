@@ -1,0 +1,31 @@
+.navbar{
+    display: inline-block;
+    /* grid-template-columns: auto auto auto auto; */
+    
+    background-color: #ffffff;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 6vh;
+    min-height: 30px;
+    text-align: center;
+    
+    padding-top: 10px;
+    padding-right: 30px;
+    
+
+
+    border: solid 2px black;
+    
+}
+
+.navbar_title{
+    grid-column-start: 2;
+    color: #e61e28;
+    text-decoration: none;
+}
+
+.navbar_link{
+    float: right;
+    
+}

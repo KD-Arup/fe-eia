@@ -1,13 +1,16 @@
 import '../styles/navbar.css';
 import react from 'react';
-import { link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
     return (
         <nav className="navbar">
             <Link className='navbar_title' to="/">
-                Arup
+                ARUP
             </Link>
+            <span className="navbar_link">
+                Menu
+            </span>
         </nav>
 
     )
