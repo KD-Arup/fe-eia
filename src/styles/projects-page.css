@@ -8,11 +8,7 @@
   margin-right: 15%;
 }
 
-.project_input_form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 
 .proj_list_display{
   display: flex;
