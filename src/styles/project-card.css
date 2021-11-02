@@ -1,0 +1,73 @@
+@media only screen and (max-width: 10000px){
+    .project_card{
+        margin: 30px;
+        display: grid;
+        width: calc(2.5 * 75 * 1px);
+        height: calc(3.1 * 100 * 1px);
+        grid-template-rows: auto auto auto auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow:0 1px 1px rgba(0,0,0,0.15),0 2px 2px rgba(0,0,0,0.15),0 4px 4px rgba(0,0,0,0.15),0 8px 8px rgba(0,0,0,0.15);
+        border-radius: 2px;
+        transition: 0.2s;
+      }
+      .project_card:hover{
+        box-shadow:0 1px 1px rgba(0,0,0,0.5),0 2px 2px rgba(0,0,0,0.5),0 4px 4px rgba(0,0,0,0.5),0 8px 8px rgba(0,0,0,0.5);
+      }
+      
+      .project_card img{
+        height: auto;
+        width: calc(2.5 * 75 * 1px);
+      }
+      
+      .project_card button{
+        border: none;
+        background-color: #78a3ba;
+        color: black;
+        transition: 0.2s;
+      }
+      .project_card button:hover{
+        border: none;
+        background-color: #ffffff;
+        color: #e61e28;
+        transition: 0.2s;
+      }
+    }
+
+@media only screen and (max-width: 600px){
+.project_card{
+    margin: 30px;
+    display: grid;
+    width: auto;
+    height:fit-content;
+    grid-template-rows: auto auto auto auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow:0 1px 1px rgba(0,0,0,0.15),0 2px 2px rgba(0,0,0,0.15),0 4px 4px rgba(0,0,0,0.15),0 8px 8px rgba(0,0,0,0.15);
+    border-radius: 2px;
+    transition: 0.2s;
+  }
+  .project_card:hover{
+    box-shadow:0 1px 1px rgba(0,0,0,0.5),0 2px 2px rgba(0,0,0,0.5),0 4px 4px rgba(0,0,0,0.5),0 8px 8px rgba(0,0,0,0.5);
+  }
+  
+  .project_card img{
+    height: auto;
+    width: calc(2.5 * 75 * 1px);
+  }
+  
+  .project_card button{
+    border: none;
+    background-color: #ffffff;
+    color: black;
+    transition: 0.2s;
+  
+  }
+  .project_card button:hover{
+    border: none;
+    background-color: #ffffff;
+    color: #e61e28;
+    transition: 0.2s;
+  }
+
+}
