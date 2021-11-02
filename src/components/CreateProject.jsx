@@ -46,6 +46,7 @@ export const CreateProject = () => {
           <h4 className='add_proj_btn_label'>
             create project
           </h4>
+          {/* TODO - small animation on the plus sign */}
           <button className='add_proj_btn' onClick={(event) => {handleClick(event)}}>
             +
           </button>
