@@ -12,7 +12,7 @@ export const ProjectPage = () => {
             <ProjectPageHeader 
                 projectName={`HardcodedProjectName`} 
                 setView={setView}/>
-            { view === 'map' ? <ProjectMap/> : <ProjectTable/>}
+            { view === 'map' ? <ProjectMap/> : <ProjectTable/> }
         </section>
     )
 }

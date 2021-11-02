@@ -15,13 +15,13 @@ export const ProjectPageHeader = ({projectName, setView}) => {
                 name="map" 
                 className='map_btn' 
                 onClick={(event) => {handleClick(event)}}>
-                Map
+                map
             </button>
             <button 
                 name="table" 
                 className='table_btn' 
                 onClick={(event) => {handleClick(event)}}>
-                Table
+                table
             </button>
         </section>
     )

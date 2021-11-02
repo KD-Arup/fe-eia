@@ -2,8 +2,8 @@ import '../styles/project-map.css';
 
 export const ProjectMap = () => {
     return (
-        <p>
-            ProjectMap
-        </p>
+       <section className='project-map-section'>
+           project map
+       </section>
     )
 }
