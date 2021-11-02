@@ -40,11 +40,6 @@ export const CreateProject = () => {
           <input type="submit" value="Save"/>
         </form>
         }
-
-        <div className='proj_form_display'>
-          here are all the project cards
-        </div>
-
       </section>
 
     )

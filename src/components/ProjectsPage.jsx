@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { CreateProject } from './CreateProject';
 import { Projects } from './Projects';
 
-//test data import
-import testData from '../data/test-data.json'
 
 export const ProjectsPage = () => {
     return ( 

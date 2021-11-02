@@ -5,6 +5,8 @@ const data = require('../data/test-data.json');
 
 export const Projects = () => {
     return ( 
-      <p>steve</p>
+      <div className='proj_form_display'>
+      here are all the project cards
+    </div>
     )
 }
