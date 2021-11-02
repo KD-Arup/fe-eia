@@ -6,7 +6,7 @@ import { ProjectMap } from './ProjectMap';
 import { ProjectTable } from './ProjectTable';
 
 export const ProjectPage = () => {
-    const [view, setView] = useState();
+    const [view, setView] = useState('map');
     return (
         <section className="project-page">
             <ProjectPageHeader 
