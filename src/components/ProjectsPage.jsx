@@ -7,9 +7,16 @@ import { Projects } from './Projects';
 
 export const ProjectsPage = () => {
     return ( 
+      <>
       <section className='projects_page'>
         <CreateProject/>
         <Projects/>
       </section>
+      <footer className="footer">
+        <p>Footer</p>
+        <p>Footer</p>
+        <p>Footer</p>
+      </footer>
+      </>
     )
 }

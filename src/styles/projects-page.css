@@ -1,3 +1,7 @@
+.element{
+  --navbarHeight: 400px;
+}
+
 .projects_page {
   margin-top: 60px;
   margin-left: 15%;
@@ -6,3 +10,24 @@
 
 
 
+.proj_list_display{
+  display: flex;
+  flex-flow: wrap;
+  align-items: top;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  height: auto;
+
+  background-color: white;
+  border-top: rgb(73, 155, 234);
+  border-top-style: solid;
+  border-top-width: 1px;
+
+  border-bottom: rgb(73, 155, 234);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.footer{
+  background-color: blue;
+}
