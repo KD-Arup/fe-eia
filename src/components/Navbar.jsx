@@ -1,7 +1,8 @@
 import '../styles/navbar.css';
 import react from 'react';
 import { Link } from 'react-router-dom';
-import FaIcons from 'react-icons/fa';
+import { BurgerButton } from './BurgerButton';
+
 
 export const Navbar = () => {
 
@@ -13,7 +14,7 @@ export const Navbar = () => {
                 </Link>
             </span>
             <span className="navbar_burger_link">
-                <BurgerButton></BurgerButton>
+                <BurgerButton/>
             </span>
         </nav>
 
