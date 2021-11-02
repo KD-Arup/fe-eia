@@ -2,6 +2,7 @@ import { Navbar } from './components/Navbar';
 import { Switch, Route } from 'react-router-dom';
 import { ProjectsPage} from './components/ProjectsPage.jsx';
 import { ErrorPage } from './components/ErrorPage.jsx';
+import { ProjectPage } from './components/ProjectPage';
 
 function App() {
   return (
@@ -10,6 +11,9 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <ProjectsPage/>
+        </Route>
+        <Route exact path='/projects/project-id'>
+          <ProjectPage/>
         </Route>
         <Route path='*'>
           <ErrorPage></ErrorPage>

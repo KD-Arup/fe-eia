@@ -8,8 +8,6 @@
   margin-right: 15%;
 }
 
-
-
 .proj_list_display{
   display: flex;
   flex-flow: wrap;
@@ -17,6 +15,7 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   height: auto;
+  width: 100%;
 
   background-color: white;
   border-top: rgb(73, 155, 234);
@@ -29,5 +28,12 @@
 }
 
 .footer{
-  background-color: blue;
+  /* background-color: blue;
+  position:absolute; 
+  bottom:0px; 
+  height:200px; 
+  left:0px; 
+  right:0px; 
+  overflow:hidden; */
+  flex-shrink: 0;
 }
