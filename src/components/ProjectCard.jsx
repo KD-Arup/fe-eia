@@ -15,9 +15,6 @@ export const ProjectCard = (props) => {
           <div>
             <img src={project.img_url} alt={project.project_name}/>
           </div>
-          <div>
-            <button>{`Open project`}</button>
-          </div>
         </div>
       </Link>
     )
