@@ -1,15 +1,19 @@
 .navbar{
-    width: 100vw;
-    position:fixed; 
-    top:0px; 
-    left:0px; 
-    height:35px; 
-    right:0px;
-    text-align: center;
-    align-content: center;
-    padding-top: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     background-color: #ffffff;
-    z-index:2;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 6vh;
+    min-height: 30px;
+    justify-content: center;
+}
+
+.arup_logo_container{
+    grid-column-start: 2;
+    margin: auto;
 }
 
 .navbar_title{
@@ -19,7 +23,10 @@
     font-weight: 400;
 }
 
-.navbar_burger_link{
-    float: right;
-    padding-right: 2.2vw;
+.burger_button_container{
+    grid-column-start: 3;
+    display: grid;
+    justify-content: right;
+    align-content: center;
 }
+

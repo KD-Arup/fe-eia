@@ -1,21 +1,28 @@
 import '../styles/navbar.css';
-import react from 'react';
 import { Link } from 'react-router-dom';
+
+import { BurgerMenu } from './BurgerMenu';
+
 import { BurgerButton } from './BurgerButton';
+
 
 
 export const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <span>
+            <span className="arup_logo_container">
                 <Link className='navbar_title' to="/">
                     ARUP
                 </Link>
             </span>
+
+            <BurgerMenu />
+
             <span className="navbar_burger_link">
                 <BurgerButton/>
             </span>
+
         </nav>
 
     )
