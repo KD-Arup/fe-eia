@@ -7,11 +7,9 @@ import { Link } from 'react-router-dom';
 export const ProjectCard = (props) => {
   const {project} = props;
     return ( 
-      <Link to={`/projects/${project.project_id}`}>
+      <Link className="project_link" to={`/projects/${project.project_id}`}>
         <div className="project_card" >
-          <div>
-            <p className="product-card-item_name" >{`${project.project_name}`}</p>
-          </div>
+          <p className="project_card_item_name" >{`${project.project_name}`}</p>
           <div>
             <img src={project.img_url} alt={project.project_name}/>
           </div>

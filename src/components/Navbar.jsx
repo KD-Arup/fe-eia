@@ -16,13 +16,7 @@ export const Navbar = () => {
                     ARUP
                 </Link>
             </span>
-
             <BurgerMenu />
-
-            <span className="navbar_burger_link">
-                <BurgerButton/>
-            </span>
-
         </nav>
 
     )

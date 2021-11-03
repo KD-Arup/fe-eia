@@ -4,6 +4,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  z-index: 0;
 }
 
 .add_proj_btn_label {
@@ -22,6 +23,7 @@
   font-weight: bolder;
   transition: 0.2s;
   opacity: 0.4;
+  z-index: inherit;
 }
 .add_proj_btn:hover {
   opacity: 1;

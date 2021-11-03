@@ -1,11 +1,12 @@
 .project-page{
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
+    margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
     height: 100%;
 }
+
 
 .project-page-header {
     display: flex;
