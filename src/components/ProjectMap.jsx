@@ -52,7 +52,7 @@ export const ProjectMap = () => {
             className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_polygon"
             title="Polygon tool (p)"
             onClick={() => setMode(new DrawPolygonMode())}
-        />
+        >+</button>
         <button
             className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
             title="Delete"
