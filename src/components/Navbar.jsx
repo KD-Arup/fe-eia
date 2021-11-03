@@ -1,10 +1,6 @@
 import '../styles/navbar.css';
 import { Link } from 'react-router-dom';
-
 import { BurgerMenu } from './BurgerMenu';
-
-import { BurgerButton } from './BurgerButton';
-
 
 
 export const Navbar = () => {

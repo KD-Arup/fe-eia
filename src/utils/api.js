@@ -1,9 +1,9 @@
-import axios from  'axios'
-import { AxiosResponse, AxiosError } from 'axios'
+//import axios from  'axios'
+//import { AxiosResponse, AxiosError } from 'axios'
 
 
 // TODO - need to change this with our actual URL
-const listApi = axios.create({baseURL:`https://be-nc-news-testing.herokuapp.com/api`})
+//const listApi = axios.create({baseURL:`https://be-nc-news-testing.herokuapp.com/api`})
 
 export const postProject = (projectInfo) => {
   // TODO - may have to edit the keys on this object to match API keys.

@@ -1,4 +1,5 @@
 import '../styles/project-table.css';
+import { Table } from './Table';
 const file  = require('../data/testReceptorData.json');
 
 const testData = file.data;
@@ -9,7 +10,7 @@ export const ProjectTable = () => {
         <section className='project_table_container'>
             {testData.map((categoryObj) => {
                 return (
-                    <p>Hello</p>
+                    <Table/>
                 )
             })}
         </section>

@@ -1,6 +1,4 @@
 import '../styles/error-page.css';
-import react from 'react';
-import { Link } from 'react-router-dom';
 
 export const ErrorPage = () => {
     const imageUrl = `https://http.cat/${404}`

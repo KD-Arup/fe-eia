@@ -1,3 +1,8 @@
 .project_table_container {
   background-color: blanchedalmond;
 }
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}

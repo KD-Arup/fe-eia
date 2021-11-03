@@ -1,6 +1,3 @@
-import react from 'react';
-import { Link } from 'react-router-dom';
-
 import { ProjectCard } from './ProjectCard';
 import '../styles/project-card.css';
 

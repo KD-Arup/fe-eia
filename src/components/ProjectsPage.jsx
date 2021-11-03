@@ -1,6 +1,4 @@
 import '../styles/projects-page.css'
-import react from 'react';
-import { Link } from 'react-router-dom';
 import { CreateProject } from './CreateProject';
 import { Projects } from './Projects';
 
