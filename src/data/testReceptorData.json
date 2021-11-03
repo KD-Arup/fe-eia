@@ -1,4 +1,4 @@
-[
+{"data": [
     {
         "category": "Historic Monument",
         "receptors": [
@@ -19,4 +19,5 @@
             "receptor_date": "2021-10-12"
         }
         ]
-}]
+}
+]}

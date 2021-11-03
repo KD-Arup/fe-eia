@@ -1,13 +1,17 @@
 import '../styles/project-table.css';
-const data = require('../data/testReceptorData.json');
-const projects = data.projects;
+const file  = require('../data/testReceptorData.json');
+
+const testData = file.data;
 
 export const ProjectTable = () => {
     
-
     return (
         <section className='project_table_container'>
-            {}
+            {testData.map((categoryObj) => {
+                return (
+                    <p>Hello</p>
+                )
+            })}
         </section>
     )
 }
