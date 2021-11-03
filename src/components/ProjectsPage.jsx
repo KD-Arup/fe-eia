@@ -13,9 +13,6 @@ export const ProjectsPage = () => {
         <Projects/>
       </section>
       <footer className="footer">
-        <p>Footer</p>
-        <p>Footer</p>
-        <p>Footer</p>
       </footer>
       </>
     )
