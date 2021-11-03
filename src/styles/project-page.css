@@ -1,0 +1,36 @@
+.project-page{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+}
+
+.project-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-page-header h3 {
+    padding-left: 20px;
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+.project-page-header button{
+    height: 20px;
+    align-self: center;
+    border: none;
+    background-color: #ffffff;
+    font-size: 90%;
+    font-family: 'Times New Roman';
+    font-style: italic;
+    transition: 0.2s;
+}
+.project-page-header button:hover{
+    color: #e61e28;
+    
+}

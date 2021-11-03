@@ -1,4 +1,5 @@
 .navbar{
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     background-color: #ffffff;
@@ -9,6 +10,7 @@
     min-height: 30px;
     justify-content: center;
 }
+
 .arup_logo_container{
     grid-column-start: 2;
     margin: auto;
@@ -17,6 +19,8 @@
 .navbar_title{
     color: #e61e28;
     text-decoration: none;
+    font-size: 180%;
+    font-weight: 400;
 }
 
 .burger_button_container{
@@ -25,3 +29,4 @@
     justify-content: right;
     align-content: center;
 }
+
