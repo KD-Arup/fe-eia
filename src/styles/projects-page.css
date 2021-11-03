@@ -21,7 +21,7 @@
   width: 100%;
   background-color: white;
   border-top: solid 1px #d1d1d1;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   margin-bottom: 50px;
 }
 
