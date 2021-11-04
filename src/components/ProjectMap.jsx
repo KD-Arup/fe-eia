@@ -57,7 +57,7 @@ export const ProjectMap = () => {
             className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
             title="Delete"
             onClick={onDelete}
-        />
+        >🪣</button>
         </div>
     </div>
     );

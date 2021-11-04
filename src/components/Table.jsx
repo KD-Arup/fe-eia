@@ -21,6 +21,7 @@ export const Table = (props) => {
                             )
                         })
                     }
+                    <th>edit</th>
                     </tr>
                 </thead>
                 <tbody key={categoryObj.category+'Body'}>

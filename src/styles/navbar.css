@@ -1,5 +1,4 @@
 .navbar{
-
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     background-color: #ffffff;
@@ -10,7 +9,7 @@
     min-height: 30px;
     justify-content: center;
     padding-top: 10px;
-    
+    z-index: 3;
 }
 
 .arup_logo_container{
