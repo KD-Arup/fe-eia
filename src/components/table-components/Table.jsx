@@ -3,8 +3,7 @@ import { TableRow } from './TableRow';
 // const testData = require('../data/testReceptorData.json');
 
 
-export const Table = (props) => {
-    const { categoryObj } = props;
+export const Table = ({ categoryObj, setProjectData }) => {
     const receptors = categoryObj.receptors;
     //console.log('here are the receptors\n', receptors);
     console.log('here is the category object\n');
@@ -27,7 +26,10 @@ export const Table = (props) => {
                 <tbody key={categoryObj.category+'Body'}>
                 {receptors.map((receptor) => {
                     return (
-                        <TableRow key={receptor.receptor_id + 'row-'} receptor={receptor}/>
+                        <TableRow 
+                            key={receptor.receptor_id + 'row-'} 
+                            receptor={receptor} 
+                            setProjectData={setProjectData}/>
                         )
                     }
                 )}

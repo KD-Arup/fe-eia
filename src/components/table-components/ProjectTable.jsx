@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import '../../styles/project-table.css';
 import { Table } from './Table';
 
-export const ProjectTable = ({ data }) => {
+export const ProjectTable = ({ projectData, setProjectData }) => {
 
-    console.dir(`data:\n${data}`);
     return (
-
         <section className='project_tables_container'>
-            {data.map((categoryObj) => {
+            {projectData.map((categoryObj) => {
                 return (
-                    <Table key={categoryObj.category+'table-'} categoryObj={categoryObj}/>
+                    <Table 
+                        key={categoryObj.category+'table-'}
+                        setProjectData={setProjectData}
+                        categoryObj={categoryObj}/>
                 )
             })}
         </section>
