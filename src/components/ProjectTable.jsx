@@ -7,7 +7,7 @@ export const ProjectTable = ({ data }) => {
     console.dir(`data:\n${data}`);
     return (
 
-        <section className='project_table_container'>
+        <section className='project_tables_container'>
             {data.map((categoryObj) => {
                 return (
                     <Table key={categoryObj.category+'table-'} categoryObj={categoryObj}/>

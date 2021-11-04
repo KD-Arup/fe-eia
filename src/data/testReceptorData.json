@@ -8,7 +8,7 @@
                 "receptor_source": "Historic England",
                 "receptor_impact": "High",
                 "receptor_assessor_comments": "This is monument will be affected by ground movements.",
-                "receptor_date": "2021-10-12"
+                "comment_date": "2021-10-12"
         },
         {
             "receptor_id": "124",
@@ -16,7 +16,7 @@
             "receptor_source": "Historic Scotland",
             "receptor_impact": "Low",
             "receptor_assessor_comments": "This is monument will be affected by ground movements.",
-            "receptor_date": "1999-10-12"
+            "comment_date": "1999-10-12"
         }
         ]
     },
@@ -29,7 +29,7 @@
                 "receptor_source": "EA",
                 "receptor_impact": "High",
                 "receptor_assessor_comments": "This is area will be affected by drainage design.",
-                "receptor_date": "2021-10-12"
+                "comment_date": "2021-10-12"
         },
         {
             "receptor_id": "126",
@@ -37,7 +37,7 @@
             "receptor_source": "EA",
             "receptor_impact": "High",
             "receptor_assessor_comments": "This boats will be floating high.",
-            "receptor_date": "1999-10-12"
+            "comment_date": "1999-10-12"
         }
         ]
     }

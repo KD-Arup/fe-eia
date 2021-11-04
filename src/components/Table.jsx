@@ -6,10 +6,12 @@ import { TableRow } from './TableRow';
 export const Table = (props) => {
     const { categoryObj } = props;
     const receptors = categoryObj.receptors;
-    console.log('here are the receptors\n', receptors);
+    //console.log('here are the receptors\n', receptors);
+    console.log('here is the category object\n');
+    console.dir(categoryObj)
     return (
         <section key='project_table_container' className='project_table_container'>
-            <h3 key={categoryObj.category}>{categoryObj.category}</h3>
+            <h3 key={categoryObj.category}>{categoryObj.category}</h3> 
             <table key={categoryObj.category+'Table'}>
                 <thead key={categoryObj.category+'Head'}>
                     <tr key="headerRow">
@@ -21,7 +23,7 @@ export const Table = (props) => {
                     }
                     </tr>
                 </thead>
-                <tbody key={categoryObj.category='Body'}>
+                <tbody key={categoryObj.category+'Body'}>
                 {receptors.map((receptor) => {
                     return (
                         <TableRow key={receptor.receptor_id + 'row-'} receptor={receptor}/>
