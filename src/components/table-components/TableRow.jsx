@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+
+
 
 
 export const TableRow = ({ receptor }) => {
@@ -33,11 +34,23 @@ export const TableRow = ({ receptor }) => {
 
     return (
         <tr key={receptor['receptor_id']+'rowNo '}>
-            {Object.keys(receptor).map((key) => {
-                    return(
-                    <td key={receptor['receptor_id']+ `${key}`}>{receptor[key]}</td>
-                )
-            })}
+            <td>{receptor['receptor_id']}</td>
+            <td>{receptor['receptor_name']}</td>
+            <td>{receptor['receptor_source']}</td>
+
+            <td>
+                {/* {receptor['receptor_impact']} */}
+            <select name="impact" id="impactDropDown">
+                <option value="Severe">Severe</option>
+                <option value="Major">Major</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Minor">Minor</option>
+            </select>
+            </td>
+            <td>{receptor['receptor_assessor_comments']}</td>
+
+            <td>{receptor['comment_date']}</td>
+            
             <button onClick={event => handleLock()}>
                 {locked ? 'locked' : 'unlocked' }
             </button>

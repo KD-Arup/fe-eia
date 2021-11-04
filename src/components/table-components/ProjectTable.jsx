@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import '../styles/project-table.css';
+import '../../styles/project-table.css';
 import { Table } from './Table';
 
 export const ProjectTable = ({ data }) => {
