@@ -1,16 +1,16 @@
+import { useEffect, useState } from 'react';
 import '../styles/project-table.css';
 import { Table } from './Table';
-const file  = require('../data/testReceptorData.json');
 
-const testData = file.data;
+export const ProjectTable = ({ data }) => {
 
-export const ProjectTable = () => {
-    
+    console.dir(`data:\n${data}`);
     return (
+
         <section className='project_table_container'>
-            {testData.map((categoryObj) => {
+            {data.map((categoryObj) => {
                 return (
-                    <Table/>
+                    <Table key={categoryObj.category+'table-'} categoryObj={categoryObj}/>
                 )
             })}
         </section>

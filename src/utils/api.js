@@ -19,3 +19,16 @@ export const postProject = (projectInfo) => {
   //   //TODO - should redirect to error page here
   // })
 }
+
+export const getTableDataByProjID = (project_id) => {
+  
+  console.log("project_id sent through>>>>\n", project_id)
+  // return listApi.get(`project/${project_id}`)
+  // .then( ( {data} ) => {
+  //   return data.project;
+  // })
+  // .catch(err => {
+  //   //console.dir(err)
+  //   //TODO - should redirect to error page here
+  // })
+}

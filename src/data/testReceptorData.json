@@ -19,5 +19,26 @@
             "receptor_date": "1999-10-12"
         }
         ]
+    },
+    {
+        "category": "Flood area",
+        "receptors": [
+            {
+                "receptor_id": "125",
+                "receptor_name": "flood plain",
+                "receptor_source": "EA",
+                "receptor_impact": "High",
+                "receptor_assessor_comments": "This is area will be affected by drainage design.",
+                "receptor_date": "2021-10-12"
+        },
+        {
+            "receptor_id": "126",
+            "receptor_name": "marina",
+            "receptor_source": "EA",
+            "receptor_impact": "High",
+            "receptor_assessor_comments": "This boats will be floating high.",
+            "receptor_date": "1999-10-12"
+        }
+        ]
     }
 ]}
