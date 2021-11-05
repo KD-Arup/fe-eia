@@ -65,8 +65,33 @@ export const ProjectMap = () => {
     //const features = editorRef.current && editorRef.current.getFeatures();
     //const selectedFeature =
       //features && (features[selectedFeatureIndex] || features[features.length - 1]);
-
-      
+      const [showSummary, setShowSummary] = useState(true);
+      const summaryTools = (
+        <div className="mapboxgl-ctrl-top-right">
+            <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
+            <button
+                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_polygon"
+                title="Polygon tool (p)"
+                style={
+                  {
+                      "width": `fit-content`,
+                      "padding": `3px 3px`
+                  }}
+                onClick={() => setShowSummary(!showSummary)}
+            >{`Show Summary`}</button>
+            {/* <button
+                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
+                title="Delete"
+                onClick={onDelete}
+            >🪣</button>
+            <button
+                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
+                title="Delete"
+                onClick={onDelete}
+            >🪣</button> */}
+            </div>
+        </div>
+        );
 
     return (
        <section className='project-map-section'>
@@ -88,9 +113,10 @@ export const ProjectMap = () => {
           editHandleStyle={getEditHandleStyle}
         />
         {drawTools} 
+        {summaryTools}
         {/* can probs add map function here to draw polygons */}
         </ReactMapGL>
-        <InsetGraph />
+        {showSummary && <InsetGraph />}
        </section>
     )
 }
