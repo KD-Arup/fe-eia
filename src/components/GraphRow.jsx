@@ -1,4 +1,4 @@
-export const GraphRow = ({percent, name}) => {
+export const GraphRow = ({percent, name, count}) => {
     let classes = [`graph-bar`]
     classes = classes.join(' ');
     
@@ -15,7 +15,7 @@ export const GraphRow = ({percent, name}) => {
     console.log(`percent${percent} name:${name}`)
     return (
         <div className="graph-row">
-            <p>{name}</p>
+            <p>{`${name} - ${count}`}</p>
             <div 
                 className={classes} 
                 style={
