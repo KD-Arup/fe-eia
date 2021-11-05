@@ -4,10 +4,10 @@ import '../styles/proj-input-form.css'
 import { postProject } from '../utils/api';
 
 
-export const CreateProject = () => {
+export const CreateProject = ({ setProjectsData }) => {
 
     const [displayForm, setDisplayForm] = useState(false);
-    const [formInput, setFormInput] = useState({username: ''});
+    const [formInput, setFormInput] = useState({project_name: '', image_url: '' });
     //const [error, setError] = useState(false);
     
 
@@ -20,6 +20,12 @@ export const CreateProject = () => {
     const LoginSubmit = (event) => {
       event.preventDefault();
       postProject( formInput )
+      setProjectsData((currProjectsData) => {
+        return [...currProjectsData, {...formInput}]
+      });
+
+      setFormInput({project_name: '', image_url: '' });
+      
       // TODO - at this point we want to redirect to the project page
       // .then(projectData => {
       //   //TODO - want tell user project successful or not.
@@ -52,26 +58,18 @@ export const CreateProject = () => {
 
        {displayForm && 
         <form className='project_input_form' onSubmit={LoginSubmit}>
-          <label htmlFor="projTitle" className='proj_create_label'>project title:</label>
+          <label htmlFor="project_name" className='proj_create_label'>project title:</label>
           <input type="text" 
-                 id="projTitle" 
-                 name="projTitle" 
+                 id="project_name" 
+                 name="project_name" 
                  className='proj_create_input'
                  onChange={handleChange} 
                  required/>
                  {/* { error ? <ErrorMessage error={error}/> : null }  */}
-          <label htmlFor="jobNo" className='proj_create_label'>job number:</label>
+          <label htmlFor="image_url" className='proj_create_label'>image URL:</label>
           <input type="text" 
-                 id="jobNo" 
-                 name="jobNo" 
-                 className='proj_create_input'
-                 onChange={handleChange} 
-                 required/>
-                 {/* { error ? <ErrorMessage error={error}/> : null }  */}
-          <label htmlFor="projType" className='proj_create_label'>project type:</label>
-          <input type="text" 
-                 id="projType" 
-                 name="projType" 
+                 id="image_url" 
+                 name="image_url" 
                  className='proj_create_input'
                  onChange={handleChange} 
                  required/>
