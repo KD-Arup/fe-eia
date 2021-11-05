@@ -1,8 +1,6 @@
-import react from 'react';
 import '../styles/project-card.css'
 import { Link } from 'react-router-dom';
 
-//test data import
 
 export const ProjectCard = (props) => {
   const {project} = props;

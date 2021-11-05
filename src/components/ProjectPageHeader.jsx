@@ -1,6 +1,5 @@
 
 import '../styles/project-page.css';
-import { useState } from 'react';
 
 export const ProjectPageHeader = ({projectName, setView}) => {
     

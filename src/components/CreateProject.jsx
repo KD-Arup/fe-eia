@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import '../styles/proj-input-form.css'
-import { ErrorMessage } from './ErrorMessage';
-import  { Redirect } from 'react-router-dom'
+//import { ErrorMessage } from './ErrorMessage';
 import { postProject } from '../utils/api';
-
 
 
 export const CreateProject = () => {
 
     const [displayForm, setDisplayForm] = useState(false);
     const [formInput, setFormInput] = useState({username: ''});
-    const [error, setError] = useState(false);
+    //const [error, setError] = useState(false);
     
 
     const handleChange = (event) => {
@@ -61,7 +59,7 @@ export const CreateProject = () => {
                  className='proj_create_input'
                  onChange={handleChange} 
                  required/>
-                 { error ? <ErrorMessage error={error}/> : null } 
+                 {/* { error ? <ErrorMessage error={error}/> : null }  */}
           <label htmlFor="jobNo" className='proj_create_label'>job number:</label>
           <input type="text" 
                  id="jobNo" 
@@ -69,7 +67,7 @@ export const CreateProject = () => {
                  className='proj_create_input'
                  onChange={handleChange} 
                  required/>
-                 { error ? <ErrorMessage error={error}/> : null } 
+                 {/* { error ? <ErrorMessage error={error}/> : null }  */}
           <label htmlFor="projType" className='proj_create_label'>project type:</label>
           <input type="text" 
                  id="projType" 
@@ -77,7 +75,7 @@ export const CreateProject = () => {
                  className='proj_create_input'
                  onChange={handleChange} 
                  required/>
-                 { error ? <ErrorMessage error={error}/> : null } 
+                 {/* { error ? <ErrorMessage error={error}/> : null }  */}
           <input type="submit" value="save" className='save_proj_btn'/>
         </form>
         }

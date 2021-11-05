@@ -1,18 +1,36 @@
 
 import '../styles/project-page.css';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import {ProjectPageHeader} from './ProjectPageHeader';
 import { ProjectMap } from './ProjectMap';
-import { ProjectTable } from './ProjectTable';
+import { ProjectTable } from './table-components/ProjectTable';
+import { useParams } from 'react-router';
+const file  = require('../data/testReceptorData.json');
+const testData = file.data;
 
 export const ProjectPage = () => {
+    const [ projectData, setProjectData] = useState();
+    // const { project_id } = useParams();
+    useEffect(()=>{
+        // getTableDataByProjID(project_id)
+        // .then((data)=>{
+        //     setProjectData(data)
+        // })
+        setProjectData(testData)
+    },[setProjectData])
+
     const [view, setView] = useState('map');
     return (
         <section className="project-page">
             <ProjectPageHeader 
                 projectName={`HardcodedProjectName`} 
                 setView={setView}/>
-            { view === 'map' ? <ProjectMap/> : <ProjectTable/> }
+            { view === 'map' ? 
+            <ProjectMap projectData={projectData}/> : 
+            <ProjectTable 
+                projectData={projectData}
+                setProjectData={setProjectData}
+                /> }
         </section>
     )
 }

@@ -1,11 +1,11 @@
 import '../styles/project-map.css';
-import ReactMapGL, { Source, Layer } from 'react-map-gl';
-import { useEffect, useState, useCallback, useRef } from 'react';
+import ReactMapGL from 'react-map-gl'
+//import { Source, Layer } from 'react-map-gl';
+import { useState, useCallback, useRef } from 'react';
 // const shapeGeojson = require('./data/test-data-box.json');
 // const multiShapeGeoJson = require('./data/test-data-multiple-poly.json');
 // new modules for drawing polygons
 import {Editor, DrawPolygonMode, EditingMode} from 'react-map-gl-draw';
-import {render} from 'react-dom';
 import {getFeatureStyle, getEditHandleStyle} from '../styles/draw-style.js';
 
 export const ProjectMap = () => {
@@ -57,14 +57,14 @@ export const ProjectMap = () => {
             className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
             title="Delete"
             onClick={onDelete}
-        />
+        >🪣</button>
         </div>
     </div>
     );
 
-    const features = editorRef.current && editorRef.current.getFeatures();
-    const selectedFeature =
-      features && (features[selectedFeatureIndex] || features[features.length - 1]);
+    //const features = editorRef.current && editorRef.current.getFeatures();
+    //const selectedFeature =
+      //features && (features[selectedFeatureIndex] || features[features.length - 1]);
 
     
 

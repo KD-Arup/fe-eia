@@ -1,0 +1,44 @@
+{"data": [
+    {
+        "category": "Historic Monument",
+        "receptors": [
+            {
+                "receptor_id": "123",
+                "receptor_name": "John's Monument",
+                "receptor_source": "Historic England",
+                "receptor_impact": "High",
+                "receptor_assessor_comments": "",
+                "comment_date": "2021-10-12"
+        },
+        {
+            "receptor_id": "124",
+            "receptor_name": "Jane's Monument",
+            "receptor_source": "Historic Scotland",
+            "receptor_impact": "Low",
+            "receptor_assessor_comments": "This is monument will be affected by ground movements.",
+            "comment_date": "1999-10-12"
+        }
+        ]
+    },
+    {
+        "category": "Flood area",
+        "receptors": [
+            {
+                "receptor_id": "125",
+                "receptor_name": "flood plain",
+                "receptor_source": "EA",
+                "receptor_impact": "High",
+                "receptor_assessor_comments": "This is area will be affected by drainage design.",
+                "comment_date": "2021-10-12"
+        },
+        {
+            "receptor_id": "126",
+            "receptor_name": "marina",
+            "receptor_source": "EA",
+            "receptor_impact": "High",
+            "receptor_assessor_comments": "This boats will be floating high.",
+            "comment_date": "1999-10-12"
+        }
+        ]
+    }
+]}
