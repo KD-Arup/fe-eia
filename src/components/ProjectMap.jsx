@@ -65,7 +65,7 @@ export const ProjectMap = () => {
     //const features = editorRef.current && editorRef.current.getFeatures();
     //const selectedFeature =
       //features && (features[selectedFeatureIndex] || features[features.length - 1]);
-      const [showSummary, setShowSummary] = useState(true);
+      const [showSummary, setShowSummary] = useState(false);
       const summaryTools = (
         <div className="mapboxgl-ctrl-top-right">
             <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
@@ -78,7 +78,7 @@ export const ProjectMap = () => {
                       "padding": `3px 3px`
                   }}
                 onClick={() => setShowSummary(!showSummary)}
-            >{`Show Summary`}</button>
+            >{showSummary ? `Hide Summary`:`Show Summary`}</button>
             {/* <button
                 className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
                 title="Delete"

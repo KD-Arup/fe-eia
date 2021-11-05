@@ -18,13 +18,15 @@
   min-height: 100px;
   min-width: 10px;
   width: 95%;
-  border: 1px solid blue;
+   border: 1px solid rgb(201, 201, 201); 
   z-index: 3;
   opacity: 1.0;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   justify-content: left;
+  border-radius: 5px;
+  padding-left: 3px;
 }
 
 .inset-graph-card p{
@@ -40,7 +42,7 @@
   background-color: white;
   height: fit-content;
   width: 95%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   z-index: 3;
   align-self: center;
 }
@@ -48,7 +50,7 @@
   width: 100%;
   min-height: 10px;
   height: fit-content;
-  border: 1px dashed black;
+  /* border: 1px dashed black; */
 }
 
 .graph-bar{
