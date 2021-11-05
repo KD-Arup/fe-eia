@@ -1,25 +1,26 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TableContext } from '../../wrappers/TableContext'
 
-export const InputCell = ({ locked, receptorComment, setRowData }) => {
+export const InputCell = ({ locked, commentData, setRowData }) => {
   const [comment, setComment] = useState({ receptor_assessor_comments: ''});
+
+  const { projData, setProjData } = useContext(TableContext);
+  console.log(projData)
 
 
   const handleChange = (event) => {
       const name = event.target.name;
       const value = event.target.value;
-      setComment(values => ({...values, [name]: value}))
+      setRowData(values => ({...values, [name]: value}))
     }
-    // patchRowData on blur
-
-
+  
   return (
-      
       <td>
-          {locked ? receptorComment : <input type="text" 
+          {locked ? commentData : <input type="text" 
                                       id="commentInput" 
                                       name="receptor_assessor_comments"
-                                      onChange={handleChange}
-                                      onBlur={console.log('about to send some api data')} 
+                                      placeholder='add comment'
+                                      onChange={handleChange} 
                                       />
           }
       </td>

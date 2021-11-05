@@ -18,7 +18,6 @@ export const ProjectPage = ( ) => {
   
     // const { project_id } = useParams();
     useEffect(()=>{
-        console.log('something is happening here')
         // getTableDataByProjID(project_id)
         // .then((data)=>{
         //     setProjectData(data)

@@ -25,9 +25,6 @@ export const TableRow = ({ receptor }) => {
         //     // }
         // }) 
     },[receptor])
-
-    console.log('here is the rowData\n:', rowData)
-
     
     return (
         <tr key={receptor['receptor_id']+'rowNo '}>
@@ -37,11 +34,11 @@ export const TableRow = ({ receptor }) => {
             <DropDownCell cellData={rowData.receptor_impact}
                           setRowData={setRowData} 
                           locked={locked}/>
-            <td>{receptor['receptor_assessor_comments']}
-                <InputCell receptorComment={receptor['receptor_assessor_comments']}
-                           setRowData={setRowData} 
-                           locked={locked}/>
-            </td>
+            
+            <InputCell  commentData={rowData.receptor_assessor_comments}
+                        setRowData={setRowData} 
+                        locked={locked}/>
+            
             <td>{receptor['comment_date']}</td>
             <td>
                 <button onClick={event => handleLock()}>
