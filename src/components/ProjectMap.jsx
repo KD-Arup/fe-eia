@@ -7,6 +7,7 @@ import { useState, useCallback, useRef } from 'react';
 // new modules for drawing polygons
 import {Editor, DrawPolygonMode, EditingMode} from 'react-map-gl-draw';
 import {getFeatureStyle, getEditHandleStyle} from '../styles/draw-style.js';
+import { InsetGraph } from './InsetGraph';
 
 export const ProjectMap = () => {
     // viewport settings for the map - in a state so can dynamically change
@@ -42,7 +43,6 @@ export const ProjectMap = () => {
         }
       }, []);
     
-
     // draw tools buttons 
     // TODO - export this to button components later
     const drawTools = (
@@ -66,7 +66,7 @@ export const ProjectMap = () => {
     //const selectedFeature =
       //features && (features[selectedFeatureIndex] || features[features.length - 1]);
 
-    
+      
 
     return (
        <section className='project-map-section'>
@@ -90,6 +90,7 @@ export const ProjectMap = () => {
         {drawTools} 
         {/* can probs add map function here to draw polygons */}
         </ReactMapGL>
+        <InsetGraph />
        </section>
     )
 }
