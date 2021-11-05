@@ -2,7 +2,7 @@ import '../../styles/project-table.css';
 import { TableRow } from './TableRow';
 // const testData = require('../data/testReceptorData.json');
 
-
+//
 export const Table = ({ categoryObj, setProjectData }) => {
     const receptors = categoryObj.receptors;
     //console.log('here are the receptors\n', receptors);
