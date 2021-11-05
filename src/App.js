@@ -18,7 +18,6 @@ function App() {
         <Route path='*'>
           <ErrorPage></ErrorPage>
         </Route>
-        
       </Switch>
     </div>
   );
