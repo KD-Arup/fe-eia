@@ -1,23 +1,40 @@
-//import axios from  'axios'
+import axios from  'axios'
 //import { AxiosResponse, AxiosError } from 'axios'
 
 
 // TODO - need to change this with our actual URL
-//const listApi = axios.create({baseURL:`https://be-nc-news-testing.herokuapp.com/api`})
+const listApi = axios.create({baseURL:`https://be-eia.herokuapp.com/api`})
+
+export const getAllProjects = () => {
+  return listApi.get(`/projects`)
+  .then( ( {data} ) => {
+    return data.projects;
+  })
+  .catch(err => {
+    console.dir(err);
+  })
+}
+
 
 export const postProject = (projectInfo) => {
   // TODO - may have to edit the keys on this object to match API keys.
-  const projectObject = {"project_name" : projectInfo.projTitle,
-                         "project_type" : projectInfo.projType,
-                          "job_number" : projectInfo.jobNo}
+
+  const projectObject = {
+    project: {
+      project_name : projectInfo.project_name,
+      image_url : projectInfo.image_url
+    }
+  }
   console.log("project info sent through>>>>\n" ,projectObject)
-  //return listApi.post(`ADD REST OF URL HERE`, projectObject)
-  // .then( ( {data} ) => {
-  // })
-  // .catch(err => {
-  //   //console.dir(err)
-  //   //TODO - should redirect to error page here
-  // })
+  return listApi.post(`/projects`, projectObject)
+  .then( ( {data} ) => {
+    console.log('post data:')
+    console.log(data);
+  })
+  .catch(err => {
+    console.dir(err)
+    //TODO - should redirect to error page here
+  })
 }
 
 export const getTableDataByProjID = (project_id) => {
