@@ -7,6 +7,7 @@ import { useState, useCallback, useRef } from 'react';
 // new modules for drawing polygons
 import {Editor, DrawPolygonMode, EditingMode} from 'react-map-gl-draw';
 import {getFeatureStyle, getEditHandleStyle} from '../styles/draw-style.js';
+import { InsetGraph } from './InsetGraph';
 
 export const ProjectMap = () => {
     // viewport settings for the map - in a state so can dynamically change
@@ -42,7 +43,6 @@ export const ProjectMap = () => {
         }
       }, []);
     
-
     // draw tools buttons 
     // TODO - export this to button components later
     const drawTools = (
@@ -65,8 +65,33 @@ export const ProjectMap = () => {
     //const features = editorRef.current && editorRef.current.getFeatures();
     //const selectedFeature =
       //features && (features[selectedFeatureIndex] || features[features.length - 1]);
-
-    
+      const [showSummary, setShowSummary] = useState(false);
+      const summaryTools = (
+        <div className="mapboxgl-ctrl-top-right">
+            <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
+            <button
+                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_polygon"
+                title="Polygon tool (p)"
+                style={
+                  {
+                      "width": `fit-content`,
+                      "padding": `3px 3px`
+                  }}
+                onClick={() => setShowSummary(!showSummary)}
+            >{showSummary ? `Hide Summary`:`Show Summary`}</button>
+            {/* <button
+                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
+                title="Delete"
+                onClick={onDelete}
+            >🪣</button>
+            <button
+                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
+                title="Delete"
+                onClick={onDelete}
+            >🪣</button> */}
+            </div>
+        </div>
+        );
 
     return (
        <section className='project-map-section'>
@@ -88,8 +113,10 @@ export const ProjectMap = () => {
           editHandleStyle={getEditHandleStyle}
         />
         {drawTools} 
+        {summaryTools}
         {/* can probs add map function here to draw polygons */}
         </ReactMapGL>
+        {showSummary && <InsetGraph />}
        </section>
     )
 }
