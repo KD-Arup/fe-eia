@@ -15,13 +15,15 @@ const testData = file.data;
 
 export const ProjectPage = ( ) => {
     const { projData, setProjData } = useContext(TableContext);
+    // make receptors state
   
     // const { project_id } = useParams();
     useEffect(()=>{
-        // getTableDataByProjID(project_id)
+        // getRecptorsByProjID(project_id)
         // .then((data)=>{
         //     setProjectData(data)
         // })
+        // if theres a response - add it to the page else just do nothing
         setProjData(testData)
     },[setProjData])
 
@@ -32,7 +34,7 @@ export const ProjectPage = ( ) => {
                 projectName={`HardcodedProjectName`} 
                 setView={setView}/>
             { view === 'map' ?
-                <ProjectMap projData={projData}/> : 
+                <ProjectMap projData={projData} /> : 
                 <ProjectTable projData={projData}/>}
         </section>
     )

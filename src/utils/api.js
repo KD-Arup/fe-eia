@@ -72,13 +72,46 @@ export const postAssessmentArea = (boundingPoly, project_id) => {
   }
   console.log(assessmentAreaObj);
   return listApi.post(`/assessment_areas`, assessmentAreaObj )
-  .then( ( {data} ) => {
-    // console.log('assessment area')
-    // console.dir(data);
-    return data;
-  })
-  .catch(err => {
-    console.dir(err)
-    //TODO - should redirect to error page here
-  })
+  // .then( ( {data} ) => {
+  //   // console.log('assessment area')
+  //   // console.dir(data);
+  //   return data;
+  // })
+  // .then(() => {
+    // return initiatePublicAPIs()
+  // })
+  // .then((response) => {
+  //   if (response) {
+  //     return getReceptors(project_id)
+  //     .then( (receptors) => {
+  //       return receptors
+  //     })
+  //   } else {
+  //     return {error message}
+  //   }
+  // })
+  // .catch(err => {
+  //   console.dir(err)
+  //   //TODO - should redirect to error page here
+  // })
 }
+
+
+// sendOffAssessmentArea(boundary, project_id)
+// .then( data => {
+//   //get back assesment areas
+//   })
+//   .then (() => {
+//   initiatePublicApis( project_id )  //api/publicapis
+//   // if boundary null, get receptor from db else get boundary
+//   //back end
+//   })
+//   .then ((receptors) => {
+//     //successful
+//     getReceptors
+//   })
+//   .catch()
+
+// /api/receptors/:project_id
+//   if new assessment area as before?
+//   
