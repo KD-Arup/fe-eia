@@ -23,7 +23,7 @@ export const CreateProject = ({ setProjectsData }) => {
       setProjectsData((currProjectsData) => {
         return [...currProjectsData, {...formInput}]
       });
-
+      setDisplayForm(false);
       setFormInput({project_name: '', image_url: '' });
       
       // TODO - at this point we want to redirect to the project page
