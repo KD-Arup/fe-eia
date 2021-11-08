@@ -12,7 +12,7 @@ function App() {
         <Route exact path='/'>
           <ProjectsPage/>
         </Route>
-        <Route exact path='/projects/project-id'>
+        <Route exact path='/projects/:project_id'>
           <ProjectPage/>
         </Route>
         <Route path='*'>

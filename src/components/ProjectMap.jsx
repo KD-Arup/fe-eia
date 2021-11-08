@@ -8,6 +8,8 @@ import { useState, useCallback, useRef } from 'react';
 import {Editor, DrawPolygonMode, EditingMode} from 'react-map-gl-draw';
 import {getFeatureStyle, getEditHandleStyle} from '../styles/draw-style.js';
 import { InsetGraph } from './InsetGraph';
+import { useParams } from 'react-router-dom';
+import { postAssessmentArea } from '../utils/api'
 
 export const ProjectMap = () => {
     // viewport settings for the map - in a state so can dynamically change
@@ -22,6 +24,8 @@ export const ProjectMap = () => {
     // states for drawing polygon on map
     const [mode, setMode] = useState(null);
     const [selectedFeatureIndex, setSelectedFeatureIndex] = useState(null);
+    const { project_id }  = useParams();
+    const [projectData, setProjectData] = useState(null);
     const editorRef = useRef(null);
 
     // on select handler for drawing polygon on map
@@ -42,6 +46,19 @@ export const ProjectMap = () => {
           setMode(new EditingMode());
         }
       }, []);
+
+
+    const handleGetDataByPoly = () => {
+        //console.log(editorRef.current);
+        // will return lat long coordinates
+        const boundingPoly = editorRef.current.getFeatures()[0].geometry.coordinates[0];
+        console.log(boundingPoly);
+        postAssessmentArea(boundingPoly, project_id)
+        .then( (projectData ) => {
+            //setProjectData(projectData)
+            console.log('assessment area posted')
+        })
+    }
     
     // draw tools buttons 
     // TODO - export this to button components later
@@ -58,6 +75,11 @@ export const ProjectMap = () => {
             title="Delete"
             onClick={onDelete}
         >🪣</button>
+        <button
+            className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
+            title="Delete"
+            onClick={handleGetDataByPoly}
+        >GO!</button>
         </div>
     </div>
     );
@@ -79,16 +101,6 @@ export const ProjectMap = () => {
                   }}
                 onClick={() => setShowSummary(!showSummary)}
             >{showSummary ? `Hide Summary`:`Show Summary`}</button>
-            {/* <button
-                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
-                title="Delete"
-                onClick={onDelete}
-            >🪣</button>
-            <button
-                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_trash"
-                title="Delete"
-                onClick={onDelete}
-            >🪣</button> */}
             </div>
         </div>
         );

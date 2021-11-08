@@ -17,8 +17,6 @@ export const getAllProjects = () => {
 
 
 export const postProject = (projectInfo) => {
-  // TODO - may have to edit the keys on this object to match API keys.
-
   const projectObject = {
     project: {
       project_name : projectInfo.project_name,
@@ -48,4 +46,39 @@ export const getTableDataByProjID = (project_id) => {
   //   //console.dir(err)
   //   //TODO - should redirect to error page here
   // })
+}
+
+
+export const postAssessmentArea = (boundingPoly, project_id) => {
+  const assessmentAreaObj = {
+    "assessment_area": {
+      "project_id": Number(project_id),
+      "geometry": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [boundingPoly]
+            }
+          }
+        ]
+      }
+    }
+  }
+  console.log(assessmentAreaObj);
+  return listApi.post(`/assessment_areas`, assessmentAreaObj )
+  .then( ( {data} ) => {
+    // console.log('assessment area')
+    // console.dir(data);
+    return data;
+  })
+  .catch(err => {
+    console.dir(err)
+    //TODO - should redirect to error page here
+  })
 }
