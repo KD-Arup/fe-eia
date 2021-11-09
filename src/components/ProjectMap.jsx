@@ -1,6 +1,6 @@
 import '../styles/project-map.css';
 import ReactMapGL from 'react-map-gl'
-//import { Source, Layer } from 'react-map-gl';
+import { Source, Layer } from 'react-map-gl';
 import { useState, useCallback, useRef } from 'react';
 // const shapeGeojson = require('./data/test-data-box.json');
 // const multiShapeGeoJson = require('./data/test-data-multiple-poly.json');
@@ -10,8 +10,12 @@ import {getFeatureStyle, getEditHandleStyle} from '../styles/draw-style.js';
 import { InsetGraph } from './InsetGraph';
 import { useParams } from 'react-router-dom';
 import { postAssessmentArea } from '../utils/api'
+import { useEffect } from 'react';
 
-export const ProjectMap = ({ isLoading }) => {
+// TEST DATA
+//const multiShapeGeoJson = require('../data/test-GEOjson.json');
+
+export const ProjectMap = ({ projData }) => {
     // viewport settings for the map - in a state so can dynamically change
     const [viewport, setViewport] = useState({
         latitude: 54.5500, 
@@ -21,12 +25,31 @@ export const ProjectMap = ({ isLoading }) => {
         zoom: 4.5
     })
 
+    const [featureCollection, setFeatureCollection] = useState({
+        "type": "FeatureCollection",
+        "features": [] 
+        });
+
+    useEffect(() => {
+        const featuresArray = [];
+        if (projData) projData.map(receptor => featuresArray.push(receptor.geometry.features[0]));
+        const multiShapeGeoJson = {
+            "type": "FeatureCollection",
+            "features": featuresArray
+            }
+        //projData.map(project => project.geometry.features)
+        setFeatureCollection(multiShapeGeoJson)
+    }, [projData]);
+
+    console.log('here is the multishape >>>>>>>>>>>>>>>>>>>>>..>>>>\n', projData)
+
     // states for drawing polygon on map
     const [mode, setMode] = useState(null);
     const [selectedFeatureIndex, setSelectedFeatureIndex] = useState(null);
     const { project_id }  = useParams();
-    const [projectData, setProjectData] = useState(null);
+    
     const editorRef = useRef(null);
+
 
     // on select handler for drawing polygon on map
     const onSelect = useCallback(options => {
@@ -35,18 +58,17 @@ export const ProjectMap = ({ isLoading }) => {
     
     // on delete handler for drawing polygon on map
     const onDelete = useCallback(() => {
-    if (selectedFeatureIndex !== null && selectedFeatureIndex >= 0) {
-        editorRef.current.deleteFeatures(selectedFeatureIndex);
-    }
-    }, [selectedFeatureIndex]);
+        if (selectedFeatureIndex !== null && selectedFeatureIndex >= 0) {
+            editorRef.current.deleteFeatures(selectedFeatureIndex);
+        }
+        }, [selectedFeatureIndex]);
 
-    // on update handler for drawing polygon on map
-    const onUpdate = useCallback(({editType}) => {
+        // on update handler for drawing polygon on map
+        const onUpdate = useCallback(({editType}) => {
         if (editType === 'addFeature') {
           setMode(new EditingMode());
         }
       }, []);
-
 
     const handleGetDataByPoly = () => {
         //console.log(editorRef.current);
@@ -57,8 +79,8 @@ export const ProjectMap = ({ isLoading }) => {
         .then( (projectData ) => {
             //setProjectData(projectData)
             console.log('assessment area posted')
-        })
-    }
+            })
+        }
     
     // draw tools buttons 
     // TODO - export this to button components later
@@ -87,25 +109,33 @@ export const ProjectMap = ({ isLoading }) => {
     //const features = editorRef.current && editorRef.current.getFeatures();
     //const selectedFeature =
       //features && (features[selectedFeatureIndex] || features[features.length - 1]);
-      const [showSummary, setShowSummary] = useState(false);
-      const summaryTools = (
-        <div className="mapboxgl-ctrl-top-right">
-            <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
-            <button
-                className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_polygon"
-                title="Polygon tool (p)"
-                style={
-                  {
-                      "width": `fit-content`,
-                      "padding": `3px 3px`
-                  }}
-                onClick={() => setShowSummary(!showSummary)}
-            >{showSummary ? `Hide Summary`:`Show Summary`}</button>
-            </div>
+    const [showSummary, setShowSummary] = useState(false);
+    const summaryTools = (
+    <div className="mapboxgl-ctrl-top-right">
+        <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
+        <button
+            className="mapbox-gl-draw_ctrl-draw-btn mapbox-gl-draw_polygon"
+            title="Polygon tool (p)"
+            style={
+                {
+                    "width": `fit-content`,
+                    "padding": `3px 3px`
+                }}
+            onClick={() => setShowSummary(!showSummary)}
+        >{showSummary ? `Hide Summary`:`Show Summary`}</button>
         </div>
-        );
+    </div>
+    );
 
-    if (isLoading) return <section className='loading'>LOADING...</section>
+    const boxLayerStyle = {
+        id: 'monument',
+        type: 'fill',
+        paint: {
+            "fill-color": '#f545c6',
+            "fill-opacity" : 1
+        }
+    };    
+
     return (
        <section className='project-map-section'>
         <ReactMapGL 
@@ -128,6 +158,23 @@ export const ProjectMap = ({ isLoading }) => {
         {drawTools} 
         {summaryTools}
         {/* can probs add map function here to draw polygons */}
+        
+        <Source type='geojson' data={featureCollection}>
+          <Layer {...boxLayerStyle}/>
+          <Layer
+            id="lineLayer"
+            type="line"
+            source="my-data"
+            layout={{
+              "line-join": "round",
+              "line-cap": "round"
+            }}
+            paint={{
+              "line-color": "#eb34ab",
+              "line-width": 5
+            }}
+          />
+        </Source>
         </ReactMapGL>
         {showSummary && <InsetGraph />}
         {/* TODO - add div over map to denote loading/ stop further action */}

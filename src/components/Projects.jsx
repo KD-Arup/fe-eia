@@ -8,7 +8,6 @@ const RedirectProject = (project_id) => {
 
 export const Projects = ({ projectsData, isLoading }) => {
 
-
   if (isLoading) return <section className='loading'>LOADING...</section>
   return ( 
     <div className="proj_list_display_container">
@@ -25,4 +24,3 @@ export const Projects = ({ projectsData, isLoading }) => {
     </div>
   )
 }
-//
