@@ -17,9 +17,12 @@ export const CreateProject = ({ setProjectsData }) => {
       setFormInput(values => ({...values, [name]: value }))
     }
 
-    const LoginSubmit = (event) => {
+    const projectSubmit = (event) => {
       event.preventDefault();
       postProject( formInput )
+      .then( response => {
+        console.log(response);
+      }) 
       setProjectsData((currProjectsData) => {
         return [...currProjectsData, {...formInput}]
       });
@@ -57,7 +60,7 @@ export const CreateProject = ({ setProjectsData }) => {
        </section>
 
        {displayForm && 
-        <form className='project_input_form' onSubmit={LoginSubmit}>
+        <form className='project_input_form' onSubmit={projectSubmit}>
           <label htmlFor="project_name" className='proj_create_label'>project title:</label>
           <input type="text" 
                  id="project_name" 

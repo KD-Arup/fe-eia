@@ -35,13 +35,20 @@ export const postProject = (projectInfo) => {
   })
 }
 
-export const getReceptorsByProjID = (project_id) => {
+
+export const deleteProjectById = (project_id) => {
   
-  // console.log("project_id sent through>>>>\n", project_id)
-  return listApi.get(`comments/receptors-comments/${project_id}`)
+  // return listApi.delete(`/projects/${project_id}`)
+  // .then (response => {
+  //   console.dir(response)
+  // })
+}
+
+export const getReceptorsByProjID = (project_id) => {
+  return listApi.get(`receptors/${project_id}`)
   .then( ( {data} ) => {
     // console.log(data.comments);
-    return data.comments;
+    return data.receptors;
   })
   // .catch(err => {
   //   //console.dir(err)
@@ -49,13 +56,16 @@ export const getReceptorsByProjID = (project_id) => {
   // })
 }
 
-// {
-//   "newComment": {
-//     "receptor_id": 1,
-//     "impact": "Minor",
-//     "comment": "yes no yes no"
-//   }
-// }
+export const getCommentsByReceptorID = (receptor_id) => {
+  return listApi.get(`/comments/receptor/${receptor_id}`)
+  .then( ({data}) => {
+    if (data) {
+      return data.comments;
+    }
+  })
+}
+
+
 export const postComment = (commentObj) => {
   // console.log(commentObj)
   return listApi.post(`/comments`, commentObj )

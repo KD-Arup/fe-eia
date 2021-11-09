@@ -70,9 +70,9 @@
       
       .project_card button{
         border: none;
-        background-color: #78a3ba;
         color: black;
         transition: 0.2s;
+        justify-self: flex-end;
       }
       .project_card button:hover{
         border: none;

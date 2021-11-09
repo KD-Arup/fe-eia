@@ -2,11 +2,13 @@
 import '../../styles/project-table.css';
 import { Table } from './Table';
 
-export const ProjectTable = ({ projData }) => {
+export const ProjectTable = ({ projData, isLoading }) => {
 
     /* map over categories and for each category generate a distinct 
         table component for formatting purposes. */
-        console.log(projData);
+    console.log(projData);
+    
+    if (isLoading) return <section className='loading'>LOADING...</section>
     return (
         <section className='project_tables_container'>
             <Table key={'summaryTable'} receptors={projData}/>

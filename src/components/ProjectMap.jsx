@@ -11,7 +11,7 @@ import { InsetGraph } from './InsetGraph';
 import { useParams } from 'react-router-dom';
 import { postAssessmentArea } from '../utils/api'
 
-export const ProjectMap = () => {
+export const ProjectMap = ({ isLoading }) => {
     // viewport settings for the map - in a state so can dynamically change
     const [viewport, setViewport] = useState({
         latitude: 54.5500, 
@@ -105,6 +105,7 @@ export const ProjectMap = () => {
         </div>
         );
 
+    if (isLoading) return <section className='loading'>LOADING...</section>
     return (
        <section className='project-map-section'>
         <ReactMapGL 
@@ -129,6 +130,7 @@ export const ProjectMap = () => {
         {/* can probs add map function here to draw polygons */}
         </ReactMapGL>
         {showSummary && <InsetGraph />}
+        {/* TODO - add div over map to denote loading/ stop further action */}
        </section>
     )
 }

@@ -19,7 +19,8 @@ export const InputCell = ({ locked, commentData, setRowData }) => {
           {locked ? commentData : <input type="text" 
                                       id="commentInput" 
                                       name="comment"
-                                      placeholder='add comment'
+                                      // placeholder='add comment'
+                                      value={commentData}
                                       onChange={handleChange} 
                                       />
           }
