@@ -35,20 +35,35 @@ export const postProject = (projectInfo) => {
   })
 }
 
-export const getTableDataByProjID = (project_id) => {
+export const getReceptorsByProjID = (project_id) => {
   
-  console.log("project_id sent through>>>>\n", project_id)
-  // return listApi.get(`project/${project_id}`)
-  // .then( ( {data} ) => {
-  //   return data.project;
-  // })
+  // console.log("project_id sent through>>>>\n", project_id)
+  return listApi.get(`comments/receptors-comments/${project_id}`)
+  .then( ( {data} ) => {
+    // console.log(data.comments);
+    return data.comments;
+  })
   // .catch(err => {
   //   //console.dir(err)
   //   //TODO - should redirect to error page here
   // })
 }
 
-
+// {
+//   "newComment": {
+//     "receptor_id": 1,
+//     "impact": "Minor",
+//     "comment": "yes no yes no"
+//   }
+// }
+export const postComment = (commentObj) => {
+  // console.log(commentObj)
+  return listApi.post(`/comments`, commentObj )
+  .then( ( {data} ) => {
+    console.log('comment response:')
+     console.dir(data);
+  })
+}
 export const postAssessmentArea = (boundingPoly, project_id) => {
   const assessmentAreaObj = {
     "assessment_area": {

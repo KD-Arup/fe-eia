@@ -5,7 +5,7 @@ export const InputCell = ({ locked, commentData, setRowData }) => {
   const [comment, setComment] = useState({ receptor_assessor_comments: ''});
 
   const { projData, setProjData } = useContext(TableContext);
-  console.log(projData)
+  // console.log(projData)
 
 
   const handleChange = (event) => {
@@ -18,7 +18,7 @@ export const InputCell = ({ locked, commentData, setRowData }) => {
       <td>
           {locked ? commentData : <input type="text" 
                                       id="commentInput" 
-                                      name="receptor_assessor_comments"
+                                      name="comment"
                                       placeholder='add comment'
                                       onChange={handleChange} 
                                       />

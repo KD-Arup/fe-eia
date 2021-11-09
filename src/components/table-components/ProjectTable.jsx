@@ -6,15 +6,18 @@ export const ProjectTable = ({ projData }) => {
 
     /* map over categories and for each category generate a distinct 
         table component for formatting purposes. */
+        console.log(projData);
     return (
         <section className='project_tables_container'>
-            {projData.map((categoryObj) => {
+            <Table key={'summaryTable'} receptors={projData}/>
+            {/* {projData.map((categoryObj) => {
                 return (
-                    <Table 
-                        key={categoryObj.category+'table-'}
-                        categoryObj={categoryObj}/>
+                    <Table key={'summaryTable'} receptors={categoryObj}/>
+                    // <Table 
+                    //     key={categoryObj.category+'table-'}
+                    //     categoryObj={categoryObj}/>
                 )
-            })}
+            })} */}
         </section>
     )
 }
