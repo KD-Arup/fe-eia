@@ -9,13 +9,13 @@ import {Editor, DrawPolygonMode, EditingMode} from 'react-map-gl-draw';
 import {getFeatureStyle, getEditHandleStyle} from '../styles/draw-style.js';
 import { InsetGraph } from './InsetGraph';
 import { useParams } from 'react-router-dom';
-import { postAssessmentArea } from '../utils/api'
-import { useEffect } from 'react';
+import { postAssessmentArea, initiatePublicApi, getReceptorsByProjID } from '../utils/api'
+import { useEffect } from 'react'; 
 
 // TEST DATA
 //const multiShapeGeoJson = require('../data/test-GEOjson.json');
 
-export const ProjectMap = ({ projData }) => {
+export const ProjectMap = ({ projData, setProjData }) => {
     // viewport settings for the map - in a state so can dynamically change
     const [viewport, setViewport] = useState({
         latitude: 54.5500, 
@@ -41,7 +41,7 @@ export const ProjectMap = ({ projData }) => {
         setFeatureCollection(multiShapeGeoJson)
     }, [projData]);
 
-    console.log('here is the multishape >>>>>>>>>>>>>>>>>>>>>..>>>>\n', projData)
+    //console.log('here is the multishape >>>>>>>>>>>>>>>>>>>>>..>>>>\n', projData)
 
     // states for drawing polygon on map
     const [mode, setMode] = useState(null);
@@ -63,6 +63,7 @@ export const ProjectMap = ({ projData }) => {
         }
         }, [selectedFeatureIndex]);
 
+
         // on update handler for drawing polygon on map
         const onUpdate = useCallback(({editType}) => {
         if (editType === 'addFeature') {
@@ -76,10 +77,20 @@ export const ProjectMap = ({ projData }) => {
         const boundingPoly = editorRef.current.getFeatures()[0].geometry.coordinates[0];
         console.log(boundingPoly);
         postAssessmentArea(boundingPoly, project_id)
-        .then( (projectData ) => {
-            //setProjectData(projectData)
-            console.log('assessment area posted')
+        .then( ( response ) => {
+            if (response.status === 201) {
+                return true
+            } else {
+                return false
+            }
             })
+        .then( response => {
+            if (response) return initiatePublicApi(project_id)
+        })
+        .then( response => {
+            if (response) setProjData(getReceptorsByProjID(project_id));
+
+        })
         }
     
     // draw tools buttons 
@@ -127,7 +138,7 @@ export const ProjectMap = ({ projData }) => {
     </div>
     );
 
-    const boxLayerStyle = {
+    const polygonLayerStyle = {
         id: 'monument',
         type: 'fill',
         paint: {
@@ -160,7 +171,7 @@ export const ProjectMap = ({ projData }) => {
         {/* can probs add map function here to draw polygons */}
         
         <Source type='geojson' data={featureCollection}>
-          <Layer {...boxLayerStyle}/>
+          <Layer {...polygonLayerStyle}/>
           <Layer
             id="lineLayer"
             type="line"
@@ -174,6 +185,7 @@ export const ProjectMap = ({ projData }) => {
               "line-width": 5
             }}
           />
+
         </Source>
         </ReactMapGL>
         {showSummary && <InsetGraph />}

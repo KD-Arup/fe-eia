@@ -46,21 +46,21 @@ export const deleteProjectById = (project_id) => {
 export const getReceptorsByProjID = (project_id) => {
   return listApi.get(`receptors/${project_id}`)
   .then( ( {data} ) => {
-    // console.log(data.comments);
     return data.receptors;
   })
-  // .catch(err => {
-  //   //console.dir(err)
-  //   //TODO - should redirect to error page here
-  // })
 }
 
 export const getCommentsByReceptorID = (receptor_id) => {
   return listApi.get(`/comments/receptor/${receptor_id}`)
-  .then( ({data}) => {
-    if (data) {
+  .then( ({data} ) => {
+    if (data.comments) {
       return data.comments;
+    } else {
+      return  '';
     }
+  })
+  .catch(err => {
+    console.dir(err)
   })
 }
 
@@ -73,7 +73,7 @@ export const postComment = (commentObj) => {
      console.dir(data);
   })
 }
-export const postAssessmentArea = (boundingPoly, project_id) => {
+export const postAssessmentArea = async (boundingPoly, project_id) => {
   const assessmentAreaObj = {
     "assessment_area": {
       "project_id": Number(project_id),
@@ -94,48 +94,15 @@ export const postAssessmentArea = (boundingPoly, project_id) => {
       }
     }
   }
-  console.log(assessmentAreaObj);
-  return listApi.post(`/assessment_areas`, assessmentAreaObj )
-  // .then( ( {data} ) => {
-  //   // console.log('assessment area')
-  //   // console.dir(data);
-  //   return data;
-  // })
-  // .then(() => {
-    // return initiatePublicAPIs()
-  // })
-  // .then((response) => {
-  //   if (response) {
-  //     return getReceptors(project_id)
-  //     .then( (receptors) => {
-  //       return receptors
-  //     })
-  //   } else {
-  //     return {error message}
-  //   }
-  // })
-  // .catch(err => {
-  //   console.dir(err)
-  //   //TODO - should redirect to error page here
-  // })
+  const result = await listApi.post(`/assessment_areas`, assessmentAreaObj )
+  return result;
 }
 
+export const initiatePublicApi = async (project_id) => {
+  const publicApiResponse = await listApi.get(`/public_apis/${project_id}`)
+  if (publicApiResponse.msg === 'OK' ) return true;
+  else return false;
+  
+}
 
-// sendOffAssessmentArea(boundary, project_id)
-// .then( data => {
-//   //get back assesment areas
-//   })
-//   .then (() => {
-//   initiatePublicApis( project_id )  //api/publicapis
-//   // if boundary null, get receptor from db else get boundary
-//   //back end
-//   })
-//   .then ((receptors) => {
-//     //successful
-//     getReceptors
-//   })
-//   .catch()
-
-// /api/receptors/:project_id
-//   if new assessment area as before?
-//   
+  
