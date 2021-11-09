@@ -6,9 +6,11 @@ const RedirectProject = (project_id) => {
   return <Redirect to={`/projects/${project_id}`}/>;
 }
 
+
 export const Projects = ({ projectsData, setProjectsData, isLoading }) => {
 
   //console.log(projectsData);
+
   if (isLoading) return <section className='loading'>LOADING...</section>
   return ( 
     <div className="proj_list_display_container">

@@ -32,8 +32,8 @@ export const TableRow = ({ receptor }) => {
         setRowData(receptor)
         getCommentsByReceptorID(receptor.receptor_id)
         .then(response => {
-            console.log(response[0].impact)
-            console.log(response[0].comment)
+            // console.log(response[0].impact)
+            // console.log(response[0].comment)
             setRowData((currentRowData) => {
                 return {...currentRowData, 
                         impact: response[0].impact, 
@@ -46,11 +46,6 @@ export const TableRow = ({ receptor }) => {
         } else {
             setLocked(true)
         }
-        // .then((data)=>{
-        //     // if (data.comments) {
-                
-        //     // }
-        // }) 
     },[receptor])
 
     //console.log(rowData);

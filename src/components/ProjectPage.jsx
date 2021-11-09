@@ -36,7 +36,9 @@ export const ProjectPage = ( ) => {
                 projectName={`HardcodedProjectName`} 
                 setView={setView}/>
             { view === 'map' ?
-                <ProjectMap projData={projData} isLoading={isLoading}/> : 
+                <ProjectMap projData={projData} 
+                            isLoading={isLoading}
+                            setProjData={setProjData}/> : 
                 <ProjectTable projData={projData} isLoading={isLoading}/>}
         </section>
     )
