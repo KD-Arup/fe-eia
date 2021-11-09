@@ -3,32 +3,37 @@ import { TableRow } from './TableRow';
 // const testData = require('../data/testReceptorData.json');
 
 // exports a distinct table component
-export const Table = ({ categoryObj, setProjectData }) => {
-    const receptors = categoryObj.receptors;
-    
+export const Table = ({ receptors }) => {
+    // console.log('receptors');
+    // console.log(receptors);
     return (
         <section key='project_table_container' className='project_table_container'>
-            <h3 key={categoryObj.category}>{categoryObj.category}</h3> 
+            <h3 key='Receptors'>Receptors</h3> 
 
-            <table key={categoryObj.category+'Table'}>
+            <table key={'Table'}>
 
-                <thead key={categoryObj.category+'Head'}>
-                    <tr key="headerRow">
-                        {Object.keys(receptors[0]).map((key) => {
+                <thead key={'TableHead'}>
+                    <tr>
+                        <th>{'receptor_id'}</th>
+                        <th>{'type'}</th>
+                        <th>{'osm_id'}</th>
+                        <th>{'impact'}</th>
+                        <th>{'comment'}</th>
+                        {/* {Object.keys(receptors[0]).map((key) => {
                             return (
                                 <th key={key}>{key}</th>
                                 )
                             })
-                        }
+                        } */}
                         <th>edit</th>
                     </tr>
                 </thead>
 
-                <tbody key={categoryObj.category+'Body'}>
+                <tbody key={'Body'}>
                 {receptors.map((receptor) => {
                     return (
                         <TableRow 
-                            key={receptor.receptor_id + 'row'} 
+                            key={receptor.receptor_id} 
                             receptor={receptor} 
                         />
                         )

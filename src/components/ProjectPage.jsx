@@ -4,28 +4,30 @@ import { useState, useEffect, useContext } from 'react';
 import {ProjectPageHeader} from './ProjectPageHeader';
 import { ProjectMap } from './ProjectMap';
 import { ProjectTable } from './table-components/ProjectTable';
-//import { useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { TableContext } from '../wrappers/TableContext';
-
-// TEST FILES ONLY - REMOVE WHEN API CALLS IMPLEMENTED
-const file  = require('../data/testReceptorData.json');
-const testData = file.data;
-
+import { getReceptorsByProjID } from '../utils/api';
+import { useLoading } from '../hooks/useLoadingHook';
 
 
 export const ProjectPage = ( ) => {
     const { projData, setProjData } = useContext(TableContext);
+    const {isLoading, setIsLoading} = useLoading()
     // make receptors state
   
-    // const { project_id } = useParams();
+    const { project_id } = useParams();
     useEffect(()=>{
-        // getRecptorsByProjID(project_id)
-        // .then((data)=>{
-        //     setProjectData(data)
-        // })
+        setIsLoading(true)
+        getReceptorsByProjID(project_id)
+        .then((data)=>{
+            setProjData(data)
+            setIsLoading(false)
+        })
         // if theres a response - add it to the page else just do nothing
-        setProjData(testData)
-    },[setProjData])
+        // setProjData(testData)
+    },[setProjData, setIsLoading, project_id])
+
+    // console.log(projData);
 
     const [view, setView] = useState('map');
     return (
@@ -34,8 +36,8 @@ export const ProjectPage = ( ) => {
                 projectName={`HardcodedProjectName`} 
                 setView={setView}/>
             { view === 'map' ?
-                <ProjectMap projData={projData} /> : 
-                <ProjectTable projData={projData}/>}
+                <ProjectMap projData={projData} isLoading={isLoading}/> : 
+                <ProjectTable projData={projData} isLoading={isLoading}/>}
         </section>
     )
 }

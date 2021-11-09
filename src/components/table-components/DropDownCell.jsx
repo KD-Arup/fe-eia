@@ -10,8 +10,9 @@ export const DropDownCell = ({ locked, cellData, setRowData }) => {
 
     return (
         <td>
-            {locked ? cellData : <select name="receptor_impact" 
+            {locked ? cellData : <select name="impact" 
                                         id="impactDropDown"
+                                        defaultValue ={cellData}
                                         onChange={(event) => {handleChange(event)}}>
                                     <option value="Severe">Severe</option>
                                     <option value="Major">Major</option>
