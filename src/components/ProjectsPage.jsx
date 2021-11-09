@@ -17,13 +17,12 @@ export const ProjectsPage = () => {
       setIsLoading(false);
     })
   },[setIsLoading]);
-
   
   return ( 
     <>
     <section className='projects_page'>
       <CreateProject setProjectsData={setProjectsData}/>
-      <Projects projectsData={projectsData} isLoading={isLoading}/>
+      <Projects projectsData={projectsData} setProjectsData={setProjectsData} isLoading={isLoading}/>
     </section>
     <footer className="footer">
     </footer>
