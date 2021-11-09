@@ -16,7 +16,9 @@ export const Projects = ({ projectsData, isLoading }) => {
       <div className='proj_list_display'>
         {projectsData && projectsData.map((project) =>{
           return (
-            <ProjectCard project={project} onclick={RedirectProject(project.project_id)}/>
+            <ProjectCard key={project.project_id + '_proj'}
+                         project={project} 
+                         onclick={RedirectProject(project.project_id)}/>
           )
         })}
       </div>

@@ -1,15 +1,15 @@
 import '../styles/project-card.css'
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { deleteProjectById } from '../utils/api';
 
 
 export const ProjectCard = ({ project } ) => {
 
     const handleDeleteProject = (project_id) => {
-      // deleteProjectById(project_id)
-      // .then( result => {
-      //   //console.log(result)
-      // })
+      deleteProjectById(project_id)
+      .then( result => {
+        //console.log(result)
+      })
     }
 
     return ( 
@@ -22,9 +22,8 @@ export const ProjectCard = ({ project } ) => {
             </Link>
           </div>
           <button className='delete_proj_btn' 
-                  onClick={handleDeleteProject(project.project_id)
+                  onClick={() => handleDeleteProject(project.project_id)
                   }>🪣</button>
         </div>
-      
     )
 }

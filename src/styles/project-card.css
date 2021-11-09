@@ -73,12 +73,14 @@
         color: black;
         transition: 0.2s;
         justify-self: flex-end;
+        opacity: 0.6;
       }
       .project_card button:hover{
         border: none;
         background-color: #ffffff;
         color: #e61e28;
         transition: 0.2s;
+        opacity: 1;
       }
     }
 

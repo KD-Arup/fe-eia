@@ -9,11 +9,6 @@ import { TableContext } from '../wrappers/TableContext';
 import { getReceptorsByProjID } from '../utils/api';
 import { useLoading } from '../hooks/useLoadingHook';
 
-// TEST FILES ONLY - REMOVE WHEN API CALLS IMPLEMENTED
-const file  = require('../data/testReceptorData.json');
-const testData = file.data;
-
-
 
 export const ProjectPage = ( ) => {
     const { projData, setProjData } = useContext(TableContext);

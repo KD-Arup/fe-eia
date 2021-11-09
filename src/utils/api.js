@@ -37,11 +37,10 @@ export const postProject = (projectInfo) => {
 
 
 export const deleteProjectById = (project_id) => {
-  
-  // return listApi.delete(`/projects/${project_id}`)
-  // .then (response => {
-  //   console.dir(response)
-  // })
+  return listApi.delete(`/projects/${project_id}`)
+  .then (response => {
+    console.dir(response)
+  })
 }
 
 export const getReceptorsByProjID = (project_id) => {
