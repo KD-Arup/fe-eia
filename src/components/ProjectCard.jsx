@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom';
 import { deleteProjectById } from '../utils/api';
 
 
-export const ProjectCard = ({ project } ) => {
+export const ProjectCard = ({ project, setProjectsData} ) => {
 
     const handleDeleteProject = (project_id) => {
+      setProjectsData((curProjectsData) => {
+        return curProjectsData.filter((project) => {
+          if (project_id !== project.project_id) {
+            return true
+          } else {
+            return false
+          }
+        })
+      })
       deleteProjectById(project_id)
       .then( result => {
         //console.log(result)
@@ -22,7 +31,7 @@ export const ProjectCard = ({ project } ) => {
             </Link>
           </div>
           <button className='delete_proj_btn' 
-                  onClick={() => handleDeleteProject(project.project_id)
+                  onClick={(event) => {handleDeleteProject(project.project_id)}
                   }>🪣</button>
         </div>
     )

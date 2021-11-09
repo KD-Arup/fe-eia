@@ -6,9 +6,9 @@ const RedirectProject = (project_id) => {
   return <Redirect to={`/projects/${project_id}`}/>;
 }
 
-export const Projects = ({ projectsData, isLoading }) => {
+export const Projects = ({ projectsData, setProjectsData, isLoading }) => {
 
-
+  //console.log(projectsData);
   if (isLoading) return <section className='loading'>LOADING...</section>
   return ( 
     <div className="proj_list_display_container">
@@ -18,7 +18,8 @@ export const Projects = ({ projectsData, isLoading }) => {
           return (
             <ProjectCard key={project.project_id + '_proj'}
                          project={project} 
-                         onclick={RedirectProject(project.project_id)}/>
+                         onclick={RedirectProject(project.project_id)}
+                         setProjectsData={setProjectsData}/>
           )
         })}
       </div>
