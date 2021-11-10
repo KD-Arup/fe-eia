@@ -24,7 +24,8 @@ export const postProject = (projectInfo) => {
     };
     //console.log('project info sent through>>>>\n', projectObject);
 
-    return listApi.post(`/projects`, projectObject)
+    return listApi
+        .post(`/projects`, projectObject)
         .then(({ data }) => {
             //console.log(`data received from creating a project: ${data.project.project_id}`)
             return data;
@@ -36,9 +37,7 @@ export const postProject = (projectInfo) => {
 };
 
 export const deleteProjectById = (project_id) => {
-    return listApi.delete(`/projects/${project_id}`).then((response) => {
-        console.dir(response);
-    });
+    return listApi.delete(`/projects/${project_id}`).then((response) => {});
 };
 
 export const getReceptorsByProjID = (project_id) => {
