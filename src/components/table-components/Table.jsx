@@ -21,11 +21,12 @@ export const Table = ({ receptors, category }) => {
     
                     <thead key={'TableHead'}>
                         <tr>
-                            <th>{'receptor_id'}</th>
-                            <th>{'type'}</th>
-                            <th>{'osm_id'}</th>
-                            <th>{'impact'}</th>
-                            <th>{'comment'}</th>
+                            <th>{'Receptor_id'}</th>
+                            <th>{'Description'}</th>
+                            <th>{'Type'}</th>
+                            <th>{'Source'}</th>
+                            <th>{'Impact'}</th>
+                            <th>{'Comment'}</th>
                             {/* {Object.keys(receptors[0]).map((key) => {
                                 return (
                                     <th key={key}>{key}</th>
@@ -42,6 +43,7 @@ export const Table = ({ receptors, category }) => {
                             <TableRow 
                                 key={receptor.receptor_id} 
                                 receptor={receptor} 
+                                source={category.source}
                             />
                             )
                         }

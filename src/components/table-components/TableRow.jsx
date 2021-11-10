@@ -5,7 +5,7 @@ import { DropDownCell } from './DropDownCell';
 import { InputCell } from './InputCell';
 import { getCommentsByReceptorID } from '../../utils/api';
 
-export const TableRow = ({ receptor }) => {
+export const TableRow = ({ receptor, source}) => {
     // console.dir(`printing receptor:${receptor}`)
     const [rowData, setRowData] = useState('');
     const [locked, setLocked] = useState();
@@ -53,8 +53,9 @@ export const TableRow = ({ receptor }) => {
     return (
         <tr key={receptor.receptor_id +'rowNo '}>
             <td>{receptor.receptor_id}</td>
+            <td>{receptor.properties.toString()}</td>
             <td>{receptor.type}</td>
-            <td>{receptor.osm_id}</td>
+            <td>{source}</td>
             <DropDownCell cellData={rowData.impact}
                           setRowData={setRowData} 
                           locked={locked}/>
@@ -65,6 +66,7 @@ export const TableRow = ({ receptor }) => {
             <td>
                 <button onClick={event => handleLock()}>
                     {locked ? 'locked' : 'unlocked' }
+                    
                 </button>
             </td>
         </tr>
