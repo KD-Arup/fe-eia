@@ -21,20 +21,20 @@ export const CreateProject = ({ setProjectsData }) => {
       event.preventDefault();
       postProject( formInput )
       .then( response => {
-        console.log(response);
-      }) 
-      setProjectsData((currProjectsData) => {
-        return [...currProjectsData, {...formInput}]
-      });
-      setDisplayForm(false);
-      setFormInput({project_name: '', image_url: '' });
+        console.log('project submitted------>', response);
+        setProjectsData((currProjectsData) => {
+          return [...currProjectsData, {...formInput, project_id: response.project.project_id}]
+        });
+
+      })
+     
+
       
-      // TODO - at this point we want to redirect to the project page
-      // .then(projectData => {
-      //   //TODO - want tell user project successful or not.
-      //   // TODO - tell user here if the error was part of the form
-          //    otherwise we can redirect them to the error page.
-      // })
+      
+  
+      setDisplayForm(false);
+      setFormInput({project_id: '', project_name: '', image_url: '' });
+
     }
 
      

@@ -26,8 +26,7 @@ export const postProject = (projectInfo) => {
     return listApi
         .post(`/projects`, projectObject)
         .then(({ data }) => {
-            console.log('post data:');
-            console.log(data);
+            return data;
         })
         .catch((err) => {
             console.dir(err);
