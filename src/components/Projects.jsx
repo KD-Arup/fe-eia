@@ -7,7 +7,7 @@ const RedirectProject = (project_id) => {
 }
 
 
-export const Projects = ({ projectsData, setProjectsData, isLoading }) => {
+export const Projects = ({ projectsCardsData, setProjectsCardsData, isLoading }) => {
 
   //console.log(projectsData);
 
@@ -16,12 +16,13 @@ export const Projects = ({ projectsData, setProjectsData, isLoading }) => {
     <div className="proj_list_display_container">
       <p>Projects</p>
       <div className='proj_list_display'>
-        {projectsData && projectsData.map((project) =>{
+        {projectsCardsData && projectsCardsData.map((project) =>{
           return (
             <ProjectCard key={project.project_id + '_proj'}
                          project={project} 
+                         setProjectsCardsData={setProjectsCardsData}
                          onclick={RedirectProject(project.project_id)}
-                         setProjectsData={setProjectsData}/>
+                         />
           )
         })}
       </div>

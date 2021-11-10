@@ -22,12 +22,12 @@ export const postProject = (projectInfo) => {
             image_url: projectInfo.image_url,
         },
     };
-    console.log('project info sent through>>>>\n', projectObject);
-    return listApi
-        .post(`/projects`, projectObject)
+    //console.log('project info sent through>>>>\n', projectObject);
+
+    return listApi.post(`/projects`, projectObject)
         .then(({ data }) => {
-            console.log('post data:');
-            console.log(data);
+            //console.log(`data received from creating a project: ${data.project.project_id}`)
+            return data;
         })
         .catch((err) => {
             console.dir(err);
@@ -94,6 +94,7 @@ export const postAssessmentArea = async (boundingPoly, project_id) => {
             },
         },
     };
+    console.log('assessmentAreaObj----->', assessmentAreaObj);
     const result = await listApi.post(`/assessment_areas`, assessmentAreaObj);
     return result;
 };

@@ -4,7 +4,7 @@ import '../styles/proj-input-form.css'
 import { postProject } from '../utils/api';
 
 
-export const CreateProject = ({ setProjectsData }) => {
+export const CreateProject = ({ setProjectsCardsData }) => {
 
     const [displayForm, setDisplayForm] = useState(false);
     const [formInput, setFormInput] = useState({project_name: '', image_url: '' });
@@ -21,24 +21,15 @@ export const CreateProject = ({ setProjectsData }) => {
       event.preventDefault();
       postProject( formInput )
       .then( response => {
-        console.log(response);
-      }) 
-      setProjectsData((currProjectsData) => {
-        return [...currProjectsData, {...formInput}]
-      });
+        setProjectsCardsData((currProjectsCardsData) => {
+          return [...currProjectsCardsData, {...formInput, project_id: response.project.project_id}]
+        });
+      })
       setDisplayForm(false);
-      setFormInput({project_name: '', image_url: '' });
-      
-      // TODO - at this point we want to redirect to the project page
-      // .then(projectData => {
-      //   //TODO - want tell user project successful or not.
-      //   // TODO - tell user here if the error was part of the form
-          //    otherwise we can redirect them to the error page.
-      // })
+      setFormInput({project_id: '', project_name: '', image_url: '' });
     }
 
-     
-    // TODO - add request to server to send info
+
     const handleClick = (event) => {
       event.preventDefault();
       setDisplayForm((curDisplay) => {
