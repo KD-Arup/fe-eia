@@ -66,9 +66,10 @@ export const TableRow = ({ receptor, source}) => {
             <td>
                 <button onClick={event => handleLock()}>
                     {locked ? 'locked' : 'unlocked' }
-                    
+
                 </button>
             </td>
         </tr>
     )
 }
+//
