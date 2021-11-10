@@ -14,7 +14,6 @@ export const ProjectPage = () => {
     // make receptors state
 
     const { project_id } = useParams();
-    console.log('----> proj id', project_id);
     useEffect(() => {
         setIsLoading(true);
         getReceptorsByProjID(project_id)
@@ -22,11 +21,7 @@ export const ProjectPage = () => {
             setProjData(data);
             setIsLoading(false);
         });
-        // if theres a response - add it to the page else just do nothing
-        // setProjData(testData)
     }, [setProjData, setIsLoading, project_id]);
-
-    // console.log(projData);
 
     const [view, setView] = useState('map');
     return (

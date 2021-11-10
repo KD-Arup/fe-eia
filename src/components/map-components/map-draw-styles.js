@@ -6,9 +6,9 @@ export const polygonLayerStyle = {
             property: 'api_id',
             stops: [
                 [0, '#3288bd'],
-                [1, '#66c2a5'],
-                [2, '#abdda4'],
-                [3, '#e6f598'],
+                [1, '#212121'],
+                [2, '#20569e'],
+                [3, '#20557d'],
                 [4, '#ffffbf'],
                 [5, '#f54281'],
             ],
@@ -21,7 +21,8 @@ export const polygonLayerStyle = {
                 [2, 0.8],
                 [3, 0.8],
                 [4, 0.8],
-                [4, 0.8],
+                [5, 0.8],
+                [6, 0]
             ],
         },
     },

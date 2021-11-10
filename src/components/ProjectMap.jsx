@@ -49,12 +49,18 @@ export const ProjectMap = ({ projData, setProjData }) => {
             type: 'FeatureCollection',
             features: featuresArray,
         };
-
+        // if the project has data
         if (projData)
             projData.forEach((receptor) => {
                 const feature = receptor.geometry.features[0];
                 feature.properties = { ...receptor.properties };
-                feature.properties.api_id = receptor.api_id;
+
+                if  (receptor.type === 'LineString') {
+                    feature.properties.api_id = 6;
+                } else {
+                    feature.properties.api_id = receptor.api_id;
+                }
+
                 if (receptor.type === 'Point') {
                     feature.properties.point_type = 0;
                 } else if (receptor.type === 'LineString') {
@@ -65,23 +71,24 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 featuresArray.push(feature);
             });
         getAssessmentAreabyProjId(project_id)
-            .then((result) => {
-                if (result.assessment_area.features !== null) {
-                    const assessmentArea = result.assessment_area.features[0];
-                    assessmentArea.properties.api_id = 0;
-                    if (result.type === 'Point') {
-                        assessmentArea.properties.point_type = 0;
-                    } else if (result.type === 'LineString') {
-                        assessmentArea.properties.point_type = 1;
-                    } else {
-                        assessmentArea.properties.point_type = 2;
-                    }
-                    featuresArray.push(assessmentArea);
+        .then((result) => {
+            // if there are features
+            if (result.assessment_area.features !== null) {
+                const assessmentArea = result.assessment_area.features[0];
+                assessmentArea.properties.api_id = 0;
+                if (result.type === 'Point') {
+                    assessmentArea.properties.point_type = 0;
+                } else if (result.type === 'LineString') {
+                    assessmentArea.properties.point_type = 1;
+                } else {
+                    assessmentArea.properties.point_type = 2;
                 }
-            })
-            .then(() => {
-                setFeatureCollection(multiShapeGeoJson);
-            });
+                featuresArray.push(assessmentArea);
+            }
+        })
+        .then(() => {
+            setFeatureCollection(multiShapeGeoJson);
+        });
     }, [projData, project_id]);
 
     const [mode, setMode] = useState(null);

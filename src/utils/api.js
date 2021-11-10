@@ -22,10 +22,11 @@ export const postProject = (projectInfo) => {
             image_url: projectInfo.image_url,
         },
     };
-    console.log('project info sent through>>>>\n', projectObject);
-    return listApi
-        .post(`/projects`, projectObject)
+    //console.log('project info sent through>>>>\n', projectObject);
+
+    return listApi.post(`/projects`, projectObject)
         .then(({ data }) => {
+            //console.log(`data received from creating a project: ${data.project.project_id}`)
             return data;
         })
         .catch((err) => {
@@ -41,7 +42,6 @@ export const deleteProjectById = (project_id) => {
 };
 
 export const getReceptorsByProjID = (project_id) => {
-    console.log('----> project id from receptors', project_id);
     return listApi.get(`receptors/${project_id}`).then(({ data }) => {
         return data.receptors;
     });
@@ -71,7 +71,6 @@ export const postComment = (commentObj) => {
 };
 
 export const getAssessmentAreabyProjId = async (project_id) => {
-    console.log('proj id from assessment area----->', project_id);
     const result = await listApi.get(`/assessment_areas/${project_id}`);
     return result.data;
 };
