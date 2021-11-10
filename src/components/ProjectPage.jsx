@@ -6,7 +6,7 @@ import { ProjectMap } from './ProjectMap';
 import { ProjectTable } from './table-components/ProjectTable';
 import { useParams } from 'react-router';
 import { TableContext } from '../wrappers/TableContext';
-import { getReceptorsByProjID } from '../utils/api';
+import { getReceptorsByProjID, getProjectByID } from '../utils/api';
 import { useLoading } from '../hooks/useLoadingHook';
 
 
@@ -14,6 +14,7 @@ export const ProjectPage = ( ) => {
     const { projData, setProjData } = useContext(TableContext);
     const {isLoading, setIsLoading} = useLoading()
     // make receptors state
+    const [projectAttributes, setProjectAttributes] = useState('');
   
     const { project_id } = useParams();
     useEffect(()=>{
@@ -27,13 +28,23 @@ export const ProjectPage = ( ) => {
         // setProjData(testData)
     },[setProjData, setIsLoading, project_id])
 
-    // console.log(projData);
+    useEffect(()=>{
+        getProjectByID(project_id)
+        .then((data)=>{
+           setProjectAttributes(data); 
+           console.log(projData);
+        })
+    },[])
+
+    
+    
+    console.log(projectAttributes);
 
     const [view, setView] = useState('map');
     return (
         <section className="project-page">
             <ProjectPageHeader 
-                projectName={`HardcodedProjectName`} 
+                projectName={projectAttributes.project_name} 
                 setView={setView}/>
             { view === 'map' ?
                 <ProjectMap projData={projData} 

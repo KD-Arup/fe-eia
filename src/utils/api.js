@@ -14,6 +14,15 @@ export const getAllProjects = () => {
     console.dir(err);
   })
 }
+export const getProjectByID = (project_id) => {
+  return listApi.get(`/projects/${project_id}`)
+  .then( ( {data} ) => {
+    return data.project;
+  })
+  .catch(err => {
+    console.dir(err);
+  })
+}
 
 
 export const postProject = (projectInfo) => {
@@ -105,4 +114,13 @@ export const initiatePublicApi = async (project_id) => {
   
 }
 
-  
+
+export const getCategories = () => {
+  return listApi.get(`/public_apis`)
+  .then( ( {data} ) => {
+    return data.publicApis;
+  })
+  .catch(err => {
+    console.dir(err);
+  })
+}
