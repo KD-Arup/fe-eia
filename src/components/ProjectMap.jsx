@@ -13,6 +13,7 @@ import {
     postAssessmentArea,
     initiatePublicApi,
     getReceptorsByProjID,
+    getAssessmentAreabyProjId,
 } from '../utils/api';
 import { useEffect } from 'react';
 
@@ -40,6 +41,9 @@ export const ProjectMap = ({ projData, setProjData }) => {
             projData.map((receptor) =>
                 featuresArray.push(receptor.geometry.features[0])
             );
+        getAssessmentAreabyProjId(project_id).then((result) => {
+            featuresArray.push(result.assessment_area.features[0]);
+        });
         const multiShapeGeoJson = {
             type: 'FeatureCollection',
             features: featuresArray,
