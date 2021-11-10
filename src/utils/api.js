@@ -93,7 +93,6 @@ export const postAssessmentArea = async (boundingPoly, project_id) => {
             },
         },
     };
-    console.log('assessmentAreaObj----->', assessmentAreaObj);
     const result = await listApi.post(`/assessment_areas`, assessmentAreaObj);
     return result;
 };
