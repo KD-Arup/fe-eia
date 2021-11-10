@@ -16,12 +16,18 @@ import {
     getAssessmentAreabyProjId,
 } from '../utils/api';
 import { useEffect } from 'react';
+import { polygonLayerStyle, 
+         pointLayerStyle,
+         linestringLayerStyle } from '../components/map-components/map-draw-styles'
 
 // TEST DATA
 //const multiShapeGeoJson = require('../data/test-GEOjson.json');
 
 export const ProjectMap = ({ projData, setProjData }) => {
     // viewport settings for the map - in a state so can dynamically change
+
+    const { project_id } = useParams();
+
     const [viewport, setViewport] = useState({
         latitude: 54.55,
         longitude: -2.4333,
@@ -37,27 +43,33 @@ export const ProjectMap = ({ projData, setProjData }) => {
 
     useEffect(() => {
         const featuresArray = [];
-        if (projData)
-            projData.map((receptor) =>
-                featuresArray.push(receptor.geometry.features[0])
-            );
-        getAssessmentAreabyProjId(project_id).then((result) => {
-            featuresArray.push(result.assessment_area.features[0]);
-        });
         const multiShapeGeoJson = {
             type: 'FeatureCollection',
             features: featuresArray,
         };
-        //projData.map(project => project.geometry.features)
-        setFeatureCollection(multiShapeGeoJson);
-    }, [projData]);
+        
+        if (projData)
+            projData.forEach((receptor) => {
+                const feature = receptor.geometry.features[0];
+                feature.properties = {...receptor.properties}
+                feature.properties.api_id = receptor.api_id;
+                featuresArray.push(feature)
+            });
+        getAssessmentAreabyProjId(project_id).then((result) => {
+            const assessmentArea = result.assessment_area.features[0]
+            assessmentArea.properties.api_id = 0;
+            featuresArray.push(assessmentArea);
+        })
+        .then(() => {
+            setFeatureCollection(multiShapeGeoJson);
+        })
+    }, [projData, project_id]);
 
-    //console.log('here is the multishape >>>>>>>>>>>>>>>>>>>>>..>>>>\n', projData)
+    console.log(featureCollection)
 
-    // states for drawing polygon on map
     const [mode, setMode] = useState(null);
     const [selectedFeatureIndex, setSelectedFeatureIndex] = useState(null);
-    const { project_id } = useParams();
+    
 
     const editorRef = useRef(null);
 
@@ -132,9 +144,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
         </div>
     );
 
-    //const features = editorRef.current && editorRef.current.getFeatures();
-    //const selectedFeature =
-    //features && (features[selectedFeatureIndex] || features[features.length - 1]);
+    
     const [showSummary, setShowSummary] = useState(false);
     const summaryTools = (
         <div className="mapboxgl-ctrl-top-right">
@@ -154,36 +164,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
         </div>
     );
 
-    const polygonLayerStyle = {
-        id: 'monument',
-        type: 'fill',
-        paint: {
-            'fill-color': '#f545c6',
-            'fill-opacity': 1,
-        },
-    };
-    const pointLayerStyle = {
-        id: 'point',
-        type: 'circle',
-        paint: {
-            // this could be a proportion of the zoom?
-            'circle-radius': 5,
-            'circle-color': '#1b4a22',
-        },
-    };
-    const linestringLayerStyle = {
-        id: 'lineLayer',
-        type: 'line',
-        source: 'my-data',
-        layout: {
-            'line-join': 'round',
-            'line-cap': 'round',
-        },
-        paint: {
-            'line-color': '#eb34ab',
-            'line-width': 5,
-        },
-    };
+    
     return (
         <section className="project-map-section">
             <ReactMapGL
@@ -207,8 +188,6 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 />
                 {drawTools}
                 {summaryTools}
-                {/* can probs add map function here to draw polygons */}
-
                 <Source type="geojson" data={featureCollection}>
                     <Layer {...polygonLayerStyle} />
                     <Layer {...linestringLayerStyle} />
@@ -216,7 +195,6 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 </Source>
             </ReactMapGL>
             {showSummary && <InsetGraph />}
-            {/* TODO - add div over map to denote loading/ stop further action */}
         </section>
     );
 };
