@@ -16,9 +16,11 @@ import {
     getAssessmentAreabyProjId,
 } from '../utils/api';
 import { useEffect } from 'react';
-import { polygonLayerStyle, 
-         pointLayerStyle,
-         linestringLayerStyle } from '../components/map-components/map-draw-styles'
+import {
+    polygonLayerStyle,
+    pointLayerStyle,
+    linestringLayerStyle,
+} from '../components/map-components/map-draw-styles';
 
 // TEST DATA
 //const multiShapeGeoJson = require('../data/test-GEOjson.json');
@@ -47,29 +49,43 @@ export const ProjectMap = ({ projData, setProjData }) => {
             type: 'FeatureCollection',
             features: featuresArray,
         };
-        
+
         if (projData)
             projData.forEach((receptor) => {
                 const feature = receptor.geometry.features[0];
-                feature.properties = {...receptor.properties}
+                feature.properties = { ...receptor.properties };
                 feature.properties.api_id = receptor.api_id;
-                featuresArray.push(feature)
+                if (receptor.type === 'Point') {
+                    feature.properties.point_type = 0;
+                } else if (receptor.type === 'LineString') {
+                    feature.properties.point_type = 1;
+                } else {
+                    feature.properties.point_type = 2;
+                }
+                featuresArray.push(feature);
             });
-        getAssessmentAreabyProjId(project_id).then((result) => {
-            const assessmentArea = result.assessment_area.features[0]
-            assessmentArea.properties.api_id = 0;
-            featuresArray.push(assessmentArea);
-        })
-        .then(() => {
-            setFeatureCollection(multiShapeGeoJson);
-        })
+        getAssessmentAreabyProjId(project_id)
+            .then((result) => {
+                if (result.assessment_area.features !== null) {
+                    const assessmentArea = result.assessment_area.features[0];
+                    assessmentArea.properties.api_id = 0;
+                    if (result.type === 'Point') {
+                        assessmentArea.properties.point_type = 0;
+                    } else if (result.type === 'LineString') {
+                        assessmentArea.properties.point_type = 1;
+                    } else {
+                        assessmentArea.properties.point_type = 2;
+                    }
+                    featuresArray.push(assessmentArea);
+                }
+            })
+            .then(() => {
+                setFeatureCollection(multiShapeGeoJson);
+            });
     }, [projData, project_id]);
-
-    console.log(featureCollection)
 
     const [mode, setMode] = useState(null);
     const [selectedFeatureIndex, setSelectedFeatureIndex] = useState(null);
-    
 
     const editorRef = useRef(null);
 
@@ -144,7 +160,6 @@ export const ProjectMap = ({ projData, setProjData }) => {
         </div>
     );
 
-    
     const [showSummary, setShowSummary] = useState(false);
     const summaryTools = (
         <div className="mapboxgl-ctrl-top-right">
@@ -164,7 +179,6 @@ export const ProjectMap = ({ projData, setProjData }) => {
         </div>
     );
 
-    
     return (
         <section className="project-map-section">
             <ReactMapGL

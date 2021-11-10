@@ -42,6 +42,7 @@ export const deleteProjectById = (project_id) => {
 };
 
 export const getReceptorsByProjID = (project_id) => {
+    console.log('----> project id from receptors', project_id);
     return listApi.get(`receptors/${project_id}`).then(({ data }) => {
         return data.receptors;
     });
@@ -71,6 +72,7 @@ export const postComment = (commentObj) => {
 };
 
 export const getAssessmentAreabyProjId = async (project_id) => {
+    console.log('proj id from assessment area----->', project_id);
     const result = await listApi.get(`/assessment_areas/${project_id}`);
     return result.data;
 };
@@ -94,6 +96,7 @@ export const postAssessmentArea = async (boundingPoly, project_id) => {
             },
         },
     };
+    console.log('assessmentAreaObj----->', assessmentAreaObj);
     const result = await listApi.post(`/assessment_areas`, assessmentAreaObj);
     return result;
 };
