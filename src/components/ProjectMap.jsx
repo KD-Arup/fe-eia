@@ -49,6 +49,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
             type: 'FeatureCollection',
             features: featuresArray,
         };
+        console.log('ProjectMap loading project data',projData)
         // if the project has data
         if (projData)
             projData.forEach((receptor) => {
@@ -120,7 +121,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
         // will return lat long coordinates
         const boundingPoly =
             editorRef.current.getFeatures()[0].geometry.coordinates[0];
-        console.log(boundingPoly);
+        // console.log(boundingPoly);
         postAssessmentArea(boundingPoly, project_id)
             .then((response) => {
                 if (response.status === 201) {
@@ -133,7 +134,10 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 if (response) return initiatePublicApi(project_id);
             })
             .then((response) => {
-                if (response) setProjData(getReceptorsByProjID(project_id));
+                if (response) getReceptorsByProjID(project_id)
+                .then ((response) => {
+                    setProjData(response)
+                });
             });
     };
 

@@ -20,11 +20,12 @@ export const ProjectPage = () => {
         setIsLoading(true);
         getReceptorsByProjID(project_id)
 
-        .then((data)=>{
-            setProjData(data)
-            setIsLoading(false)
-        })
-    },[setProjData, setIsLoading, project_id])
+        .then((data) => {
+            console.log('ProjectPage projData\n:', data)
+            setProjData(data);
+            setIsLoading(false);
+    });
+    }, [setProjData, setIsLoading, project_id]);
 
     useEffect(()=>{
         getProjectByID(project_id)
@@ -33,6 +34,7 @@ export const ProjectPage = () => {
            console.log(projData);
         })
     },[])
+
 
     const [view, setView] = useState('map');
     return (
