@@ -44,6 +44,8 @@ export const ProjectMap = ({ projData, setProjData }) => {
         features: [],
     });
 
+    const [hoverInfo, setHoverInfo] = useState(null);
+
     useEffect(() => {
         const featuresArray = [];
         const multiShapeGeoJson = {
@@ -85,6 +87,8 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 );
                 const assessmentArea = result.assessment_area.features[0];
                 assessmentArea.properties.api_id = 0;
+                assessmentArea.properties.name = 'assessment area';
+                assessmentArea.properties.type = 'hide to see receptors';
                 if (result.type === 'Point') {
                     assessmentArea.properties.point_type = 0;
                 } else if (result.type === 'LineString') {
@@ -199,6 +203,28 @@ export const ProjectMap = ({ projData, setProjData }) => {
         </div>
     );
 
+    const onHover = useCallback(event => {
+        //console.log(event.features[0])
+        const {
+          features,
+          srcEvent: {offsetX, offsetY}
+        } = event;
+        console.log('this should be the x', offsetX)
+        const hoveredFeature = features && features[0];
+    
+        setHoverInfo(
+          hoveredFeature
+            ? {
+                feature: hoveredFeature,
+                x: offsetX,
+                y: offsetY
+              }
+            : null
+        );
+        console.log(hoveredFeature)
+      }, []);
+      
+
     return (
         <section className="project-map-section">
             <ReactMapGL
@@ -207,8 +233,15 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 onViewportChange={(viewport) => {
                     setViewport(viewport);
                 }}
+                onHover={onHover}
                 mapStyle="mapbox://styles/dod900/ckv9v08x7154f15qs9d29virx"
             >
+                {hoverInfo && (
+                    <div className="tooltip" style={{left: hoverInfo.x, top: hoverInfo.y}}>
+                        <div>Name: {hoverInfo.feature.properties.name ? hoverInfo.feature.properties.name : 'missing name'}</div>
+                        <div>Type: {hoverInfo.feature.properties.type ?  hoverInfo.feature.properties.type : 'missing type'}</div>
+                    </div>
+                )}
                 <Editor
                     ref={editorRef}
                     style={{ width: '100%', height: '100%' }}
@@ -227,6 +260,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
                     <Layer {...linestringLayerStyle} />
                     <Layer {...pointLayerStyle} />
                 </Source>
+                
             </ReactMapGL>
             {showSummary && <InsetGraph />}
         </section>
