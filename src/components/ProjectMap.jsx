@@ -88,7 +88,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 const assessmentArea = result.assessment_area.features[0];
                 assessmentArea.properties.api_id = 0;
                 assessmentArea.properties.name = 'assessment area';
-                assessmentArea.properties.type = 'hide to see receptors';
+                assessmentArea.properties.type = 'assessment_area';
                 if (result.type === 'Point') {
                     assessmentArea.properties.point_type = 0;
                 } else if (result.type === 'LineString') {
@@ -209,7 +209,6 @@ export const ProjectMap = ({ projData, setProjData }) => {
           features,
           srcEvent: {offsetX, offsetY}
         } = event;
-        console.log('this should be the x', offsetX)
         const hoveredFeature = features && features[0];
     
         setHoverInfo(
@@ -221,8 +220,10 @@ export const ProjectMap = ({ projData, setProjData }) => {
               }
             : null
         );
-        console.log(hoveredFeature)
+        // console.log(features)
       }, []);
+
+      console.log(featureCollection)
       
 
     return (
