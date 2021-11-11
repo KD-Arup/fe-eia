@@ -15,6 +15,7 @@ import {
     getReceptorsByProjID,
     getAssessmentAreabyProjId,
 } from '../utils/api';
+import { updateViewport } from '../utils/viewport.utils';
 import { useEffect } from 'react';
 import {
     polygonLayerStyle,
@@ -43,14 +44,16 @@ export const ProjectMap = ({ projData, setProjData }) => {
         features: [],
     });
 
+    const [hoverInfo, setHoverInfo] = useState(null);
+
     useEffect(() => {
         const featuresArray = [];
         const multiShapeGeoJson = {
             type: 'FeatureCollection',
             features: featuresArray,
         };
-        console.log('ProjectMap loading project data',projData)
-        // if the project has data
+        
+        // if the project has data get project data and process
         if (projData)
             projData.forEach((receptor) => {
                 const feature = receptor.geometry.features[0];
@@ -71,12 +74,21 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 }
                 featuresArray.push(feature);
             });
+        // then get assessment area by project id
         getAssessmentAreabyProjId(project_id)
         .then((result) => {
             // if there are features
             if (result.assessment_area.features !== null) {
+                setViewport(
+                    updateViewport(
+                        result.assessment_area.features[0].geometry
+                            .coordinates[0]
+                    )
+                );
                 const assessmentArea = result.assessment_area.features[0];
                 assessmentArea.properties.api_id = 0;
+                assessmentArea.properties.name = 'assessment area';
+                assessmentArea.properties.type = 'assessment_area';
                 if (result.type === 'Point') {
                     assessmentArea.properties.point_type = 0;
                 } else if (result.type === 'LineString') {
@@ -87,6 +99,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 featuresArray.push(assessmentArea);
             }
         })
+        // then set the feature collection to the newly created json
         .then(() => {
             setFeatureCollection(multiShapeGeoJson);
         });
@@ -190,6 +203,29 @@ export const ProjectMap = ({ projData, setProjData }) => {
         </div>
     );
 
+    const onHover = useCallback(event => {
+        //console.log(event.features[0])
+        const {
+          features,
+          srcEvent: {offsetX, offsetY}
+        } = event;
+        const hoveredFeature = features && features[0];
+    
+        setHoverInfo(
+          hoveredFeature
+            ? {
+                feature: hoveredFeature,
+                x: offsetX,
+                y: offsetY
+              }
+            : null
+        );
+        // console.log(features)
+      }, []);
+
+      console.log(featureCollection)
+      
+
     return (
         <section className="project-map-section">
             <ReactMapGL
@@ -198,8 +234,15 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 onViewportChange={(viewport) => {
                     setViewport(viewport);
                 }}
+                onHover={onHover}
                 mapStyle="mapbox://styles/dod900/ckv9v08x7154f15qs9d29virx"
             >
+                {hoverInfo && (
+                    <div className="tooltip" style={{left: hoverInfo.x, top: hoverInfo.y}}>
+                        <div>Name: {hoverInfo.feature.properties.name ? hoverInfo.feature.properties.name : 'missing name'}</div>
+                        <div>Type: {hoverInfo.feature.properties.type ?  hoverInfo.feature.properties.type : 'missing type'}</div>
+                    </div>
+                )}
                 <Editor
                     ref={editorRef}
                     style={{ width: '100%', height: '100%' }}
@@ -218,6 +261,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
                     <Layer {...linestringLayerStyle} />
                     <Layer {...pointLayerStyle} />
                 </Source>
+                
             </ReactMapGL>
             {showSummary && <InsetGraph />}
         </section>

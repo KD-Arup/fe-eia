@@ -26,6 +26,7 @@ export const polygonLayerStyle = {
             ],
         },
     },
+    'filter': ['==', '$type', 'Polygon']
 };
 
 export const pointLayerStyle = {
@@ -50,6 +51,7 @@ export const pointLayerStyle = {
             ],
         },
     },
+    'filter': ['==', '$type', 'Point']
 };
 export const linestringLayerStyle = {
     id: 'lineLayer',
@@ -63,4 +65,6 @@ export const linestringLayerStyle = {
         'line-color': '#eb34ab',
         'line-width': 0,
     },
+    'filter': ['==', '$type', 'LineString']
 };
+

@@ -21,7 +21,7 @@ export const ProjectPage = () => {
         getReceptorsByProjID(project_id)
 
         .then((data) => {
-            console.log('ProjectPage projData\n:', data)
+            //console.log('ProjectPage projData\n:', data)
             setProjData(data);
             setIsLoading(false);
     });
