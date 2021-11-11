@@ -5,15 +5,25 @@ import axios from 'axios';
 const listApi = axios.create({ baseURL: `https://be-eia.herokuapp.com/api` });
 
 export const getAllProjects = () => {
-    return listApi
-        .get(`/projects`)
-        .then(({ data }) => {
-            return data.projects;
-        })
-        .catch((err) => {
-            console.dir(err);
-        });
-};
+
+  return listApi.get(`/projects`)
+  .then( ( {data} ) => {
+    return data.projects;
+  })
+  .catch(err => {
+    console.dir(err);
+  })
+}
+
+export const getProjectByID = (project_id) => {
+  return listApi.get(`/projects/${project_id}`)
+  .then( ( {data} ) => {
+    return data.project;
+  })
+  .catch(err => {
+    console.dir(err);
+  })
+}
 
 export const postProject = (projectInfo) => {
     const projectObject = {
@@ -48,6 +58,7 @@ export const getReceptorsByProjID = (project_id) => {
 };
 
 export const getCommentsByReceptorID = (receptor_id) => {
+
     return listApi
         .get(`/comments/receptor/${receptor_id}`)
         .then(({ data }) => {
@@ -75,6 +86,7 @@ export const getAssessmentAreabyProjId = async (project_id) => {
     return result.data;
 };
 
+
 export const postAssessmentArea = async (boundingPoly, project_id) => {
     const assessmentAreaObj = {
         assessment_area: {
@@ -100,7 +112,19 @@ export const postAssessmentArea = async (boundingPoly, project_id) => {
 };
 
 export const initiatePublicApi = async (project_id) => {
-    const publicApiResponse = await listApi.get(`/public_apis/${project_id}`);
-    if (publicApiResponse.msg === 'OK') return true;
-    else return false;
-};
+  const publicApiResponse = await listApi.get(`/public_apis/${project_id}`)
+  if (publicApiResponse.msg === 'OK' ) return true;
+  else return false;
+  
+}
+
+export const getCategories = () => {
+  return listApi.get(`/public_apis`)
+  .then( ( {data} ) => {
+    return data.publicApis;
+  })
+  .catch(err => {
+    console.dir(err);
+  })
+}
+
