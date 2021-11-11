@@ -5,7 +5,7 @@ import { ProjectMap } from './ProjectMap';
 import { ProjectTable } from './table-components/ProjectTable';
 import { useParams } from 'react-router';
 import { TableContext } from '../wrappers/TableContext';
-import { getReceptorsByProjID } from '../utils/api';
+import { getReceptorsByProjID, getProjectByID } from '../utils/api';
 import { useLoading } from '../hooks/useLoadingHook';
 
 export const ProjectPage = () => {
@@ -13,10 +13,13 @@ export const ProjectPage = () => {
     const { isLoading, setIsLoading } = useLoading();
     // make receptors state
 
+    const [projectAttributes, setProjectAttributes] = useState('');
+  
     const { project_id } = useParams();
     useEffect(() => {
         setIsLoading(true);
         getReceptorsByProjID(project_id)
+
         .then((data) => {
             console.log('ProjectPage projData\n:', data)
             setProjData(data);
@@ -24,22 +27,27 @@ export const ProjectPage = () => {
     });
     }, [setProjData, setIsLoading, project_id]);
 
+    useEffect(()=>{
+        getProjectByID(project_id)
+        .then((data)=>{
+           setProjectAttributes(data); 
+           console.log(projData);
+        })
+    },[])
+
+
     const [view, setView] = useState('map');
     return (
         <section className="project-page">
-            <ProjectPageHeader
-                projectName={`HardcodedProjectName`}
-                setView={setView}
-            />
-            {view === 'map' ? (
-                <ProjectMap
-                    projData={projData}
-                    isLoading={isLoading}
-                    setProjData={setProjData}
-                />
-            ) : (
-                <ProjectTable projData={projData} isLoading={isLoading} />
-            )}
+
+            <ProjectPageHeader 
+                projectName={projectAttributes.project_name} 
+                setView={setView}/>
+            { view === 'map' ?
+                <ProjectMap projData={projData} 
+                            isLoading={isLoading}
+                            setProjData={setProjData}/> : 
+                <ProjectTable projData={projData} isLoading={isLoading}/>}
         </section>
     );
 };
