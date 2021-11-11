@@ -6,26 +6,27 @@ import { getAllProjects } from '../utils/api';
 import { useLoading } from '../hooks/useLoadingHook';
 
 export const ProjectsPage = () => {
-  const [ projectsData, setProjectsData ] = useState();
+  const [ projectsCardsData, setProjectsCardsData ] = useState();
   const {isLoading, setIsLoading} = useLoading()
 
   useEffect(()=>{
     setIsLoading(true)
     getAllProjects()
     .then(( projects ) => {
-      setProjectsData(projects);
+      setProjectsCardsData(projects);
       setIsLoading(false);
     })
   },[setIsLoading]);
   
   return ( 
     <>
-      <section className='projects_page'>
-        <CreateProject setProjectsData={setProjectsData}/>
-        <Projects projectsData={projectsData} setProjectsData={setProjectsData} isLoading={isLoading}/>
-      </section>
-      <footer className="footer">
-      </footer>
+    <section className='projects_page'>
+      <CreateProject setProjectsCardsData={setProjectsCardsData}/>
+      <Projects projectsCardsData={projectsCardsData} 
+                setProjectsCardsData={setProjectsCardsData} 
+                isLoading={isLoading}/>
+    </section>
+    <footer className="footer"/>
     </>
   )
 }

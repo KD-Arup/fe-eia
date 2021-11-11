@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { deleteProjectById } from '../utils/api';
 
 
-export const ProjectCard = ({ project, setProjectsData} ) => {
+export const ProjectCard = ({ project, setProjectsCardsData} ) => {
 
     const handleDeleteProject = (project_id) => {
-      setProjectsData((curProjectsData) => {
+      setProjectsCardsData((curProjectsData) => {
         return curProjectsData.filter((project) => {
           if (project_id !== project.project_id) {
             return true
