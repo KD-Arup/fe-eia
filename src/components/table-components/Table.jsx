@@ -1,10 +1,8 @@
 import '../../styles/project-table.css';
 import { TableRow } from './TableRow';
-// const testData = require('../data/testReceptorData.json');
 
 // exports a distinct table component
 export const Table = ({ receptors, category }) => {
-    console.log(receptors);
     let heading = ''
     if (category.keywords === 'water') {
         heading = `${category.category} - waterbody`
@@ -27,13 +25,7 @@ export const Table = ({ receptors, category }) => {
                             <th>{'Source'}</th>
                             <th>{'Impact'}</th>
                             <th>{'Comment'}</th>
-                            {/* {Object.keys(receptors[0]).map((key) => {
-                                return (
-                                    <th key={key}>{key}</th>
-                                    )
-                                })
-                            } */}
-                            <th>edit</th>
+                            <th className={'lock_column'}></th>
                         </tr>
                     </thead>
     
@@ -41,15 +33,15 @@ export const Table = ({ receptors, category }) => {
                     {receptors.map((receptor) => {
                         return (
                             <TableRow 
-                                key={receptor.receptor_id} 
+                                key={`receptor-${receptor.receptor_id}-${category.category}`} 
                                 receptor={receptor} 
                                 source={category.source}
+                                keyStringStart={`receptor-${receptor.receptor_id}-${category.category}`} 
                             />
                             )
                         }
                     )}
                     </tbody>
-    
                 </table>
             </section>
         )

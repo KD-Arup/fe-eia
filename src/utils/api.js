@@ -73,13 +73,12 @@ export const getCommentsByReceptorID = (receptor_id) => {
   })
 }
 
-
 export const postComment = (commentObj) => {
   // console.log(commentObj)
   return listApi.post(`/comments`, commentObj )
   .then( ( {data} ) => {
-    console.log('comment response:')
-     console.dir(data);
+    console.log('comment response:');
+    console.dir(data);
   })
 }
 export const postAssessmentArea = async (boundingPoly, project_id) => {
@@ -113,7 +112,6 @@ export const initiatePublicApi = async (project_id) => {
   else return false;
   
 }
-
 
 export const getCategories = () => {
   return listApi.get(`/public_apis`)

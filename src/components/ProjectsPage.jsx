@@ -20,12 +20,12 @@ export const ProjectsPage = () => {
   
   return ( 
     <>
-    <section className='projects_page'>
-      <CreateProject setProjectsData={setProjectsData}/>
-      <Projects projectsData={projectsData} setProjectsData={setProjectsData} isLoading={isLoading}/>
-    </section>
-    <footer className="footer">
-    </footer>
+      <section className='projects_page'>
+        <CreateProject setProjectsData={setProjectsData}/>
+        <Projects projectsData={projectsData} setProjectsData={setProjectsData} isLoading={isLoading}/>
+      </section>
+      <footer className="footer">
+      </footer>
     </>
   )
 }
