@@ -23,11 +23,12 @@ import {
 } from '../components/map-components/map-draw-styles';
 import { useLoading } from '../hooks/useLoadingHook';
 import { MapLoading } from './map-components/MapLoading';
+import { updateViewport } from '../utils/viewport.utils';
 
 // TEST DATA
 //const multiShapeGeoJson = require('../data/test-GEOjson.json');
 
-export const ProjectMap = ({ projData, setProjData, featureCollection }) => {
+export const ProjectMap = ({ setProjData, featureCollection }) => {
     // viewport settings for the map - in a state so can dynamically change
 
     const { isLoading, setIsLoading } = useLoading();
@@ -66,28 +67,56 @@ export const ProjectMap = ({ projData, setProjData, featureCollection }) => {
         }
     }, []);
 
+    useEffect(() => {}, [isLoading, viewport]);
+
     const handleGetDataByPoly = () => {
         setIsLoading(true);
         //console.log(editorRef.current);
         // will return lat long coordinates
         const boundingPoly =
             editorRef.current.getFeatures()[0].geometry.coordinates[0];
-        console.log(boundingPoly);
         postAssessmentArea(boundingPoly, project_id)
             .then((response) => {
+                console.log('1 posted the assessment area --------');
                 if (response.status === 201) {
+                    console.log('2 response true for assessment area --------');
                     return true;
                 } else {
                     return false;
                 }
             })
             .then((response) => {
-                if (response) return initiatePublicApi(project_id);
+                console.log('3 check public apis --------');
+                if (response) {
+                    return initiatePublicApi(project_id).then((response) => {
+                        console.log(response);
+                        if (response) {
+                            console.log('4 public apis worked --------');
+                            getReceptorsByProjID(project_id).then(
+                                (response) => {
+                                    setProjData(response);
+                                    console.log(
+                                        '5 we have set projData --------'
+                                    );
+                                }
+                            );
+                        }
+                    });
+                }
             })
-            .then((response) => {
-                if (response) setProjData(getReceptorsByProjID(project_id));
+            .then(() => {
+                getAssessmentAreabyProjId(project_id).then((response) => {
+                    setViewport(
+                        updateViewport(
+                            response.assessment_area.features[0].geometry
+                                .coordinates[0]
+                        )
+                    );
+                });
+            })
+            .then(() => {
+                setIsLoading(false);
             });
-        setIsLoading(false);
     };
 
     // draw tools buttons

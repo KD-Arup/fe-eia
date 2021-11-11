@@ -19,7 +19,6 @@ export const ProjectPage = () => {
 
     const { project_id } = useParams();
     useEffect(() => {
-        setIsLoading(true);
         const featuresArray = [];
         const multiShapeGeoJson = {
             type: 'FeatureCollection',
@@ -83,7 +82,7 @@ export const ProjectPage = () => {
                         });
                 }
             });
-    }, [setProjData, setIsLoading, project_id, featureCollection]);
+    }, [project_id, featureCollection, setProjData]);
 
     const [view, setView] = useState('map');
     return (

@@ -99,6 +99,6 @@ export const postAssessmentArea = async (boundingPoly, project_id) => {
 
 export const initiatePublicApi = async (project_id) => {
     const publicApiResponse = await listApi.get(`/public_apis/${project_id}`);
-    if (publicApiResponse.msg === 'OK') return true;
+    if (publicApiResponse.data.msg === 'OK') return true;
     else return false;
 };
