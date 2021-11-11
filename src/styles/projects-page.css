@@ -26,10 +26,11 @@
 }
 
 .footer{
-  background-color: rgb(201, 201, 201);
+  /* background-color: rgb(201, 201, 201); */
+  background-color: white;
   position:fixed; 
   bottom:0px; 
-  height:50px; 
+  height:30px; 
   left:0px; 
   right:0px; 
   overflow:hidden;

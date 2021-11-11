@@ -26,7 +26,7 @@ export const ProjectsPage = () => {
                 setProjectsCardsData={setProjectsCardsData} 
                 isLoading={isLoading}/>
     </section>
-    <footer className="footer"/>
+    <footer className="footer">Digital EIA ©</footer>
     </>
   )
 }
