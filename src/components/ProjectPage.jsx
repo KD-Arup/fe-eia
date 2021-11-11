@@ -17,10 +17,11 @@ export const ProjectPage = () => {
     useEffect(() => {
         setIsLoading(true);
         getReceptorsByProjID(project_id)
-            .then((data) => {
+        .then((data) => {
+            console.log('ProjectPage projData\n:', data)
             setProjData(data);
             setIsLoading(false);
-        });
+    });
     }, [setProjData, setIsLoading, project_id]);
 
     const [view, setView] = useState('map');

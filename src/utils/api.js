@@ -42,8 +42,13 @@ export const deleteProjectById = (project_id) => {
 };
 
 export const getReceptorsByProjID = (project_id) => {
-    return listApi.get(`receptors/${project_id}`).then(({ data }) => {
+    return listApi.get(`receptors/${project_id}`)
+    .then(({ data }) => {
         return data.receptors;
+    })
+    .catch((err) => {
+        // comment here
+        console.dir(err);
     });
 };
 
@@ -67,6 +72,9 @@ export const postComment = (commentObj) => {
     return listApi.post(`/comments`, commentObj).then(({ data }) => {
         console.log('comment response:');
         console.dir(data);
+    })
+    .catch((err) => {
+        console.dir(err);
     });
 };
 
@@ -96,11 +104,14 @@ export const postAssessmentArea = async (boundingPoly, project_id) => {
     };
     console.log('assessmentAreaObj----->', assessmentAreaObj);
     const result = await listApi.post(`/assessment_areas`, assessmentAreaObj);
-    return result;
+    return result
 };
 
 export const initiatePublicApi = async (project_id) => {
     const publicApiResponse = await listApi.get(`/public_apis/${project_id}`);
-    if (publicApiResponse.msg === 'OK') return true;
-    else return false;
+    if (publicApiResponse.data.msg === 'OK') return true;
+    else return false
+    .catch((err) => {
+        console.dir(err);
+    });
 };
