@@ -15,6 +15,7 @@ import {
     getReceptorsByProjID,
     getAssessmentAreabyProjId,
 } from '../utils/api';
+import { updateViewport } from '../utils/viewport.utils';
 import { useEffect } from 'react';
 import {
     polygonLayerStyle,
@@ -49,8 +50,8 @@ export const ProjectMap = ({ projData, setProjData }) => {
             type: 'FeatureCollection',
             features: featuresArray,
         };
-        console.log('ProjectMap loading project data',projData)
-        // if the project has data
+        
+        // if the project has data get project data and process
         if (projData)
             projData.forEach((receptor) => {
                 const feature = receptor.geometry.features[0];
@@ -71,10 +72,17 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 }
                 featuresArray.push(feature);
             });
+        // then get assessment area by project id
         getAssessmentAreabyProjId(project_id)
         .then((result) => {
             // if there are features
             if (result.assessment_area.features !== null) {
+                setViewport(
+                    updateViewport(
+                        result.assessment_area.features[0].geometry
+                            .coordinates[0]
+                    )
+                );
                 const assessmentArea = result.assessment_area.features[0];
                 assessmentArea.properties.api_id = 0;
                 if (result.type === 'Point') {
@@ -87,6 +95,7 @@ export const ProjectMap = ({ projData, setProjData }) => {
                 featuresArray.push(assessmentArea);
             }
         })
+        // then set the feature collection to the newly created json
         .then(() => {
             setFeatureCollection(multiShapeGeoJson);
         });
